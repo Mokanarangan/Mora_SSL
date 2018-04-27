@@ -31,7 +31,7 @@ class PMI():
             split = line.split()
             tag = '1'
             if line in ['\n', '\r\n']:
-                data.append({'token': '0'})
+                data.append({'token': None})
                 continue
             if len(split) > 1:
                 tag = split[1]
