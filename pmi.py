@@ -2,19 +2,38 @@ class PMI():
     """Subramany et al's PMI model
     """
 
-    def __init__(self, train, dev, test):
+    def __init__(self, train, test, un_labeled):
         """Initiate 
         Arguments:
             train {string} -- train data path
-            dev {string} -- dev data path
+            un_labeled {string} -- un_labeled data path
             test {string} -- test data path
         """
 
-        self.train = train
-        self.dev = dev
-        self.test = test
+        self.train = self._process_info(train)
+        self.un_labeled = self._process_info(un_labeled)
+        self.test = self._process_info(test)
+        self.tag_info = dict()
+
+    def _process_info(self, file_name):
+        """Process data and stores in variable.
+        File should be in 'X X' format
+        Arguments:
+            file_name {string} -- path of the file
+        """
+
+        file = open(file_name)
+        data = []
+        for line in file:
+            split = line.split()
+            tag = -1
+            if len(split) > 1:
+                tag = split[1]
+            if tag not in self.tag_info and tag != -1:
+                self.tag_info[tag] = len(self.tag_info.keys)
+            data.append({'token': split[0], 'tag': tag})
 
     def build_graph(self):
         """build the PMI graph
         """
-        f = open(self.train)
+        print('buidling print graph')
