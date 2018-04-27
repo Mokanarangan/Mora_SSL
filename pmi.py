@@ -29,7 +29,8 @@ class PMI():
             split = line.split()
             tag = -1
             if line in ['\n', '\r\n']:
-                print('New line')
+                data.append({'token': None})
+                continue
             if len(split) > 1:
                 tag = split[1]
             if tag not in self.tag_info and tag != -1:
