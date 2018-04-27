@@ -28,6 +28,9 @@ class PMI():
         for line in file:
             split = line.split()
             tag = -1
+            if line in ['\n', '\r\n']:
+                print('New line')
+
             if len(split) > 1:
                 tag = split[1]
             if tag not in self.tag_info and tag != -1:
