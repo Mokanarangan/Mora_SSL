@@ -2,7 +2,7 @@ class PMI():
     """Subramany et al's PMI model
     """
 
-    def __init__(self, train, test, un_labeled):
+    def __init__(self, dataset):
         """Initiate 
         Arguments:
             train {string} -- train data path
@@ -10,9 +10,10 @@ class PMI():
             test {string} -- test data path
         """
 
-        self.train = self._process_info(train)
-        self.un_labeled = self._process_info(un_labeled)
-        self.test = self._process_info(test)
+        self.train = self._process_info('./data/' + dataset + '/train.txt')
+        self.un_labeled = self._process_info(
+            './data/' + dataset + '/un_labeled.txt')
+        self.test = self._process_info('./data/' + dataset + '/test.txt')
         self.tag_info = dict()
 
     def _process_info(self, file_name):
