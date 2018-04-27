@@ -33,7 +33,7 @@ class PMI():
             if len(split) > 1:
                 tag = split[1]
             if tag not in self.tag_info and tag != -1:
-                self.tag_info[tag] = len(self.tag_info.keys)
+                self.tag_info[tag] = len(self.tag_info.keys())
             data.append({'token': split[0], 'tag': tag})
 
     def build_graph(self):
