@@ -40,6 +40,7 @@ class PMI():
             if tag not in self.tag_info and tag != -1:
                 self.tag_info[tag] = len(self.tag_info.keys())
             data.append({'token': split[0], 'tag': tag})
+        return data
 
     def build_graph(self):
         """build the PMI graph
