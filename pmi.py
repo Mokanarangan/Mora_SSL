@@ -2,7 +2,7 @@ class PMI():
     """Subramany et al's PMI model
     """
 
-    def __init__(self, dataset):
+    def __init__(self, dataset, BIO):
         """Initiate 
         Arguments:
             train {string} -- train data path
@@ -10,7 +10,6 @@ class PMI():
             test {string} -- test data path
         """
 
-        self.tag_info = dict()
         self.train = self._process_info('./data/' + dataset + '/train.txt')
         self.un_labeled = self._process_info(
             './data/' + dataset + '/un_labeled.txt')
@@ -18,7 +17,6 @@ class PMI():
         print('Number of Train lines: %d' % len(self.train))
         print('Number of Test lines: %d' % len(self.test))
         print('Number of Unlabeled lines: %d' % len(self.un_labeled))
-        print('Number of tags: %d' % len(self.tag_info.keys()))
 
     def _process_info(self, file_name):
         """Process data and stores in variable.
@@ -31,14 +29,12 @@ class PMI():
         data = []
         for line in file:
             split = line.split()
-            tag = -1
+            tag = '1'
             if line in ['\n', '\r\n']:
-                data.append({'token': None})
+                data.append({'token': '0'})
                 continue
             if len(split) > 1:
                 tag = split[1]
-            if tag not in self.tag_info and tag != -1:
-                self.tag_info[tag] = len(self.tag_info.keys())
             data.append({'token': split[0], 'tag': tag})
         return data
 
