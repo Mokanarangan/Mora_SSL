@@ -15,6 +15,10 @@ class PMI():
         self.un_labeled = self._process_info(
             './data/' + dataset + '/un_labeled.txt')
         self.test = self._process_info('./data/' + dataset + '/test.txt')
+        print('Number of Train lines: %d' % len(self.train))
+        print('Number of Test lines: %d' % len(self.test))
+        print('Number of Unlabeled lines: %d' % len(self.un_labeled))
+        print('Number of tags: %d' % len(self.tag_info.keys()))
 
     def _process_info(self, file_name):
         """Process data and stores in variable.
