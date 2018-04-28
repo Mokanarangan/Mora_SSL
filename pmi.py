@@ -29,7 +29,7 @@ class PMI():
         data = []
         for line in file:
             split = line.split()
-            tag = '1'
+            tag = None
             if line in ['\n', '\r\n']:
                 data.append({'token': None})
                 continue

@@ -7,7 +7,6 @@ parser = argparse.ArgumentParser()
 parser.add_argument(
     '--dataset', help='Location of word dataset files', type=str, required='true'
 )
-
 parser.add_argument(
     '--BIO', help='State if its bio_tag', type=bool, default=False
 )
