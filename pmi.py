@@ -48,7 +48,6 @@ class PMI():
         """
         print('Extracting n-grams ...')
         n_gram_total = dict()
-        graph_n_gram = dict()
         total_count = defaultdict(lambda: 0)
 
         final = self.train + self.test + self.un_labeled
@@ -103,21 +102,20 @@ class PMI():
             total_count[left_context_right] += 1
 
         print('Features extracted')
-        print('Calculating PMI values')
 
-        # for key in n_gram_total.keys():
-        #     for feat in n_gram_total[key].keys()
-
-        print('PMI values calculated')
+        graph_list = []
+        unique_graph = dict()
 
         for n_gram in concat_graph_list:
             word_comb = n_gram[0]['token'] + "|" + \
                 n_gram[1]['token'] + "|" + n_gram[2]['token']
-            graph_n_gram[word_comb] = True
+            if word_comb not in unique_graph:
+                graph_list.append(n_gram_total[word_comb])
+                unique_graph[word_comb] = True
             count += 1
 
         print('Total ngram count: %d' % count)
-        print('Total unique ngram count: %d' % len(graph_n_gram.keys()))
+        print('Total unique ngram count: %d' % len(graph_list))
         print('Calculating nearest neighbors..')
 
         def distance_fun(x, y):
