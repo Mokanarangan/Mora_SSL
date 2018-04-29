@@ -1,4 +1,5 @@
 import math
+from sklearn.neighbors import NearestNeighbors
 from collections import defaultdict
 
 
@@ -48,17 +49,12 @@ class PMI():
         print('Extracting n-grams ...')
         self.n_gram = dict()
         self.graph_n_gram = dict()
+
         final = self.train + self.test + self.un_labeled
         concat_list = self.find_ngrams(final, window)
         concat_graph_list = self.find_ngrams(self.test + self.train, window)
         count = 0
-        for n_gram in concat_graph_list:
-            word_comb = n_gram[0]['token'] + "|" + \
-                n_gram[1]['token'] + "|" + n_gram[2]['token']
-            self.graph_n_gram[word_comb] = True
-            count += 1
-        print('Total ngram count: %d' % count)
-        print('Total unique ngram count: %d' % len(self.graph_n_gram.keys()))
+        print('Extracting features')
 
         for i in range(0, len(concat_list)):
             n_gram = concat_list[i]
@@ -98,10 +94,22 @@ class PMI():
             self.n_gram[word_comb][left_context_right] += 1
 
         print('Features extracted')
-        print('Calculating PMI..')
+
+        for n_gram in concat_graph_list:
+            word_comb = n_gram[0]['token'] + "|" + \
+                n_gram[1]['token'] + "|" + n_gram[2]['token']
+            self.graph_n_gram[word_comb] = True
+            count += 1
+
+        print('Total ngram count: %d' % count)
+        print('Total unique ngram count: %d' % len(self.graph_n_gram.keys()))
+        print('Calculating nearest neighbors..')
 
         def distance_fun(x, y):
             return 0
+        nbrs = NearestNeighbors(
+            n_neighbors=4, algorithm='ball_tree', metric='pyfunc', func=distance_fun)
+        nbrs.fit(self.n_gram)
 
     def find_ngrams(self, input_list, n):
         return list(zip(*[input_list[i:] for i in range(n)]))
