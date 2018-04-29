@@ -58,8 +58,8 @@ class PMI():
 
         for i in range(0, len(concat_list)):
             n_gram = concat_list[i]
-            word_comb = n_gram[0]['token'] + "|" + \
-                n_gram[1]['token'] + "|" + n_gram[2]['token']
+            word_comb = n_gram[0]['token'] + \
+                n_gram[1]['token'] + n_gram[2]['token']
             if(i == 0):
                 x1 = '<new>'
             else:
@@ -107,8 +107,8 @@ class PMI():
         unique_graph = dict()
 
         for n_gram in concat_graph_list:
-            word_comb = n_gram[0]['token'] + "|" + \
-                n_gram[1]['token'] + "|" + n_gram[2]['token']
+            word_comb = n_gram[0]['token'] + \
+                n_gram[1]['token'] + n_gram[2]['token']
             if word_comb not in unique_graph and word_comb in n_gram_total:
                 unique_graph[word_comb] = n_gram_total[word_comb]
             count += 1
@@ -116,7 +116,6 @@ class PMI():
         total = len(concat_list) * 8
         for key in unique_graph.keys():
             for key2 in unique_graph[key].keys():
-                print(key, total_count[key], total_count[key2])
                 pmi_val = (unique_graph[key][key2] / total) / \
                     ((total_count[key] / total) * (total_count[key2] / total))
                 print(pmi_val)
