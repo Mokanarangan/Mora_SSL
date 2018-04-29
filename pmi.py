@@ -102,14 +102,14 @@ class PMI():
             n_gram_total[word_comb][left_context_right] += 1
             total_count[left_context_right] += 1
 
-            traverse_list[left] = traverse_list[left].append(word_comb)
-            traverse_list[right] = traverse_list[right].append(word_comb)
-            traverse_list[center] = traverse_list[center].append(word_comb)
-            traverse_list[trigram_center] = traverse_list[trigram_center].append(
+            traverse_list[left].append(word_comb)
+            traverse_list[right].append(word_comb)
+            traverse_list[center].append(word_comb)
+            traverse_list[trigram_center].append(
                 word_comb)
-            traverse_list[left_word_right] = traverse_list[left_word_right].append(
+            traverse_list[left_word_right].append(
                 word_comb)
-            traverse_list[left_context_right] = traverse_list[left_context_right].append(
+            traverse_list[left_context_right].append(
                 word_comb)
 
         print('Features extracted')
