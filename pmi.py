@@ -113,7 +113,7 @@ class PMI():
             count += 1
 
         print('Total ngram count: %d' % count)
-        print('Total unique ngram count: %d' % len(graph_list))
+        print('Total unique ngram count: %d' % len(unique_graph.keys()))
         print('Calculating nearest neighbors..')
 
         def distance_fun(x, y):
