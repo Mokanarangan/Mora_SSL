@@ -103,25 +103,27 @@ class PMI():
 
         print('Features extracted')
 
+        graph_list = []
         unique_graph = dict()
 
         for n_gram in concat_graph_list:
             word_comb = n_gram[0]['token'] + "|" + \
                 n_gram[1]['token'] + "|" + n_gram[2]['token']
             if word_comb not in unique_graph and word_comb in n_gram_total:
-                unique_graph[word_comb] = n_gram_total[word_comb]
+                graph_list.append(n_gram_total[word_comb])
+                unique_graph[word_comb] = True
             count += 1
 
         print('Total ngram count: %d' % count)
-        print('Total unique ngram count: %d' % len(unique_graph.keys()))
+        print('Total unique ngram count: %d' % len(graph_list))
         print('Calculating nearest neighbors..')
 
         def distance_fun(x, y):
             print(x, y)
             return 0
         nbrs = NearestNeighbors(
-            n_neighbors=4, algorithm='ball_tree', metric=distance_fun, metric_params=dict)
-        nbrs.fit(unique_graph)
+            n_neighbors=4, metric=distance_fun)
+        nbrs.fit(graph_list)
 
     def find_ngrams(self, input_list, n):
         return list(zip(*[input_list[i:] for i in range(n)]))
