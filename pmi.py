@@ -63,7 +63,7 @@ class PMI():
             n_gram = concat_list[i]
             word_comb = n_gram[0]['token'] + "|" + \
                 n_gram[1]['token'] + "|" + n_gram[2]['token']
-            if(i == 0)
+            if(i == 0):
                 x1 = '<new>'
             else:
                 x1 = concat_list[i - 1][2]['token']
