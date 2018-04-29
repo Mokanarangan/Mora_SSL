@@ -122,6 +122,7 @@ class PMI():
             return 0
         nbrs = NearestNeighbors(
             n_neighbors=4, algorithm='ball_tree', metric=distance_fun)
+        nbrs.fit(unique_graph)
 
     def find_ngrams(self, input_list, n):
         return list(zip(*[input_list[i:] for i in range(n)]))
