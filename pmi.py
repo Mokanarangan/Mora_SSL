@@ -34,7 +34,7 @@ class PMI():
             split = line.split()
             tag = None
             if line in ['\n', '\r\n']:
-                data.append({'token': '\n', 'tag': tag})
+                data.append({'token': '<new>', 'tag': tag})
                 continue
             if len(split) > 1:
                 tag = split[1]
@@ -48,11 +48,14 @@ class PMI():
         self.n_gram = dict()
         final = self.train + self.test + self.un_labeled
         concat_list = self.find_ngrams(final, window)
-        print('Total line count: %d' % len(final))
+        count = 0
         for n_gram in concat_list:
             word_comb = n_gram[0]['token'] + "|" + \
                 n_gram[1]['token'] + "|" + n_gram[2]['token']
-            print(word_comb)
+            count += 1
+            self.n_gram[word_comb] = True
+        print('Total ngram count: %d' % count)
+        print('Total unique ngram count: %d' % len(self.n_gram.keys()))
 
     def find_ngrams(self, input_list, n):
         return zip(*[input_list[i:] for i in range(n)])
