@@ -106,7 +106,7 @@ class PMI():
         print('Calculating PMI values')
 
         for key in n_gram_total.keys():
-            for feat in n_gram_total[key].keys():
+            for feat in n_gram_total[key].keys()
 
         print('PMI values calculated')
 
