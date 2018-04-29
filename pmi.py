@@ -98,6 +98,10 @@ class PMI():
             self.n_gram[word_comb][left_context_right] += 1
 
         print('Features extracted')
+        print('Calculating PMI..')
+
+        def distance_fun(x, y):
+            return 0
 
     def find_ngrams(self, input_list, n):
         return list(zip(*[input_list[i:] for i in range(n)]))
