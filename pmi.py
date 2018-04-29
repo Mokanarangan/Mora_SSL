@@ -102,22 +102,27 @@ class PMI():
             total_count[left_context_right] += 1
 
         print('Features extracted')
+        print('Calculating PMI values..')
 
-        graph_list = []
         unique_graph = dict()
 
         for n_gram in concat_graph_list:
             word_comb = n_gram[0]['token'] + "|" + \
                 n_gram[1]['token'] + "|" + n_gram[2]['token']
             if word_comb not in unique_graph and word_comb in n_gram_total:
-                graph_list.append(n_gram_total[word_comb])
-                unique_graph[word_comb] = True
+                unique_graph[word_comb] = n_gram_total[word_comb]
             count += 1
 
+        total = unique_graph.keys() * 8
+        for key in unique_graph.keys():
+            val = unique_graph[key]
+            print(val)
+
+        print('PMI values calculated')
+
         print('Total ngram count: %d' % count)
-        print('Total unique ngram count: %d' % len(graph_list))
+        print('Total unique ngram count: %d' % len(unique_graph.keys()))
         print('Calculating nearest neighbors..')
-        print('Features: %d' % len(total_count.keys()))
 
         def distance_fun(x, y):
             print(x, y)
