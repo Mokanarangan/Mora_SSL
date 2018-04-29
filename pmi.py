@@ -88,12 +88,19 @@ class PMI():
             self.n_gram[word_comb][trigram_context] += 1
             total_count[trigram_context] += 1
             self.n_gram[word_comb][trigram] += 1
+            total_count[trigram] += 1
             self.n_gram[word_comb][left] += 1
+            total_count[left] += 1
             self.n_gram[word_comb][right] += 1
+            total_count[right] += 1
             self.n_gram[word_comb][center] += 1
+            total_count[center] += 1
             self.n_gram[word_comb][trigram_center] += 1
+            total_count[trigram_center] += 1
             self.n_gram[word_comb][left_word_right] += 1
+            total_count[left_word_right] += 1
             self.n_gram[word_comb][left_context_right] += 1
+            total_count[left_word_right] += 1
 
         print('Features extracted')
 
