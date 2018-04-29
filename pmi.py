@@ -46,16 +46,23 @@ class PMI():
         """
         print('Extracting n-grams ...')
         self.n_gram = dict()
+        self.graph_n_gram = dict()
         final = self.train + self.test + self.un_labeled
         concat_list = self.find_ngrams(final, window)
+        concat_graph_list = self.find_ngrams(self.test + self.train, window)
         count = 0
+        for n_gram in concat_graph_list:
+            word_comb = n_gram[0]['token'] + "|" + \
+                n_gram[1]['token'] + "|" + n_gram[2]['token']
+            self.graph_n_gram[word_comb] = True
+            count += 1
+        print('Total ngram count: %d' % count)
+        print('Total unique ngram count: %d' % len(self.graph_n_gram.keys()))
+
         for n_gram in concat_list:
             word_comb = n_gram[0]['token'] + "|" + \
                 n_gram[1]['token'] + "|" + n_gram[2]['token']
-            count += 1
             self.n_gram[word_comb] = True
-        print('Total ngram count: %d' % count)
-        print('Total unique ngram count: %d' % len(self.n_gram.keys()))
 
     def find_ngrams(self, input_list, n):
         return zip(*[input_list[i:] for i in range(n)])
