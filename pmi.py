@@ -109,7 +109,7 @@ class PMI():
         for n_gram in concat_graph_list:
             word_comb = n_gram[0]['token'] + "|" + \
                 n_gram[1]['token'] + "|" + n_gram[2]['token']
-            if word_comb not in unique_graph:
+            if word_comb not in unique_graph and word_comb in n_gram_total:
                 graph_list.append(n_gram_total[word_comb])
                 unique_graph[word_comb] = True
             count += 1
