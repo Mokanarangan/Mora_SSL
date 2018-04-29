@@ -13,3 +13,4 @@ parser.add_argument(
 
 args = parser.parse_args()
 pmi = PMI(args.dataset, args.BIO)
+pmi.build_graph()

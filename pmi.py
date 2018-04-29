@@ -31,14 +31,17 @@ class PMI():
             split = line.split()
             tag = None
             if line in ['\n', '\r\n']:
-                data.append({'token': None})
+                data.append({'token': None, 'tag': tag})
                 continue
             if len(split) > 1:
                 tag = split[1]
             data.append({'token': split[0], 'tag': tag})
         return data
 
-    def build_graph(self):
+    def build_graph(self, window=3):
         """build the PMI graph
         """
-        print('buidling print graph')
+        print('Extracting n-grams...')
+        self.n_gram = dict()
+        final = self.train + self.test + self.un_labeled
+        print('Total line count: %d' % len(final))
