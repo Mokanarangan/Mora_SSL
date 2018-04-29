@@ -89,6 +89,7 @@ class PMI():
             left_context_right = x1 + x2 + x4
 
             self.n_gram[word_comb][trigram_context] += 1
+            print(word_comb)
             print(self.n_gram[word_comb][trigram_context])
 
     def find_ngrams(self, input_list, n):
