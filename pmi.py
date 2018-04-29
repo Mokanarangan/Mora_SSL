@@ -118,7 +118,7 @@ class PMI():
             for key2 in unique_graph[key].keys():
                 pmi_val = math.log((unique_graph[key][key2] / total) /
                                    ((total_count[key] / total) * (total_count[key2] / total)), 2)
-                print(pmi_val)
+                unique_graph[key][key2] = pmi_val
 
         print('PMI values calculated')
 
