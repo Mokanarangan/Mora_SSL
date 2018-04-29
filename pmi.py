@@ -119,6 +119,7 @@ class PMI():
                 pmi_val = math.log((unique_graph[key][key2] / total) /
                                    ((total_count[key] / total) * (total_count[key2] / total)), 2)
                 unique_graph[key][key2] = pmi_val
+        print('PMI values calculated')
 
         def distance_fun(x, y):
             return 0
@@ -126,8 +127,7 @@ class PMI():
             for j in range(0, i):
                 distance_fun(i, j)
                 # Here
-
-        print('PMI values calculated')
+        print('Distance calculated')
 
         print('Total ngram count: %d' % count)
         print('Total unique ngram count: %d' % len(unique_graph.keys()))
