@@ -134,8 +134,8 @@ class PMI():
 
         def distance_fun(x, y):
             return 0
-        for key in traverse_list:
-            print(len(traverse_list[key]))
+        # for key in traverse_list:
+        #     print(len(traverse_list[key]))
         print('Distance calculated')
 
         print('Total ngram count: %d' % count)
