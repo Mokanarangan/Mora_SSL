@@ -119,6 +119,7 @@ class PMI():
         print('Calculating nearest neighbors..')
 
         def distance_fun(x, y):
+            print(x, y)
             return 0
         nbrs = NearestNeighbors(
             n_neighbors=4, algorithm='ball_tree', metric=distance_fun)
