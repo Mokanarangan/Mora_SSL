@@ -54,7 +54,7 @@ class PMI():
         concat_list = self.find_ngrams(final, window)
         concat_graph_list = self.find_ngrams(self.test + self.train, window)
         count = 0
-        traverse_list = defaultdict(lambda: [])
+        traverse_list = defaultdict(list)
         print('Extracting features')
 
         for i in range(0, len(concat_list)):
