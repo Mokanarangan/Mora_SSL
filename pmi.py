@@ -48,7 +48,8 @@ class PMI():
         self.n_gram = dict()
         final = self.train + self.test + self.un_labeled
         concat_list = self.find_ngrams(final, window)
-        print('Total line count: %d' % len(concat_list))
+        print('Total line count: %d' % len(final))
+        print(concat_list)
 
     def find_ngrams(self, input_list, n):
         return zip(*[input_list[i:] for i in range(n)])
