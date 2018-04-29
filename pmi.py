@@ -115,8 +115,10 @@ class PMI():
 
         total = len(concat_list) * 8
         for key in unique_graph.keys():
-            val = unique_graph[key]
-            print(val)
+            for key2 in unique_graph[key].keys():
+                pmi_val = (unique_graph[key][key2] / total) / \
+                    ((total_count[key] / total) * (total_count[key2] / total))
+                print(pmi_val)
 
         print('PMI values calculated')
 
