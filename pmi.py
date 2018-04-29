@@ -100,9 +100,16 @@ class PMI():
             self.n_gram[word_comb][left_word_right] += 1
             total_count[left_word_right] += 1
             self.n_gram[word_comb][left_context_right] += 1
-            total_count[left_word_right] += 1
+            total_count[left_context_right] += 1
 
         print('Features extracted')
+        print('Calculating PMI values')
+
+        for key in self.n_gram.keys():
+            for feat in self.n_gram[key].keys():
+                print(key, feat)
+
+        print('PMI values calculated')
 
         for n_gram in concat_graph_list:
             word_comb = n_gram[0]['token'] + "|" + \
@@ -118,7 +125,6 @@ class PMI():
             return 0
         nbrs = NearestNeighbors(
             n_neighbors=4, algorithm='ball_tree', metric=distance_fun)
-        nbrs.fit(self.n_gram)
 
     def find_ngrams(self, input_list, n):
         return list(zip(*[input_list[i:] for i in range(n)]))
