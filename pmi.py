@@ -113,7 +113,7 @@ class PMI():
                 unique_graph[word_comb] = n_gram_total[word_comb]
             count += 1
 
-        total = unique_graph.keys() * 8
+        total = len(concat_list) * 8
         for key in unique_graph.keys():
             val = unique_graph[key]
             print(val)
