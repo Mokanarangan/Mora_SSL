@@ -120,8 +120,8 @@ class PMI():
             print(x, y)
             return 0
         nbrs = NearestNeighbors(
-            n_neighbors=4, algorithm='ball_tree', metric=unique_graph, metric_params=dict)
-        nbrs.fit(graph_list)
+            n_neighbors=4, algorithm='ball_tree', metric=distance_fun, metric_params=dict)
+        nbrs.fit(unique_graph)
 
     def find_ngrams(self, input_list, n):
         return list(zip(*[input_list[i:] for i in range(n)]))
