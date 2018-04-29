@@ -1,4 +1,5 @@
 import math
+from collections import defaultdict
 
 
 class PMI():
@@ -75,9 +76,20 @@ class PMI():
             x2 = n_gram[0]['token']
             x3 = n_gram[1]['token']
             x4 = n_gram[2]['token']
-            print("%s %s %s %s %s" % (x1, x2, x3, x4, x5))
+            if word_comb not in self.n_gram:
+                self.n_gram[word_comb] = defaultdict(int)
+            # Features
+            trigram_context = x1 + x2 + x3 + x4 + x5
+            trigram = x2 + x3 + x4
+            left = x1 + x2
+            right = x4 + x5
+            center = x2
+            trigram_center = x2 + x4
+            left_word_right = x2 + x4 + x5
+            left_context_right = x1 + x2 + x4
 
-            self.n_gram[word_comb] = True
+            self.n_gram[word_comb][trigram_context] += 1
+            print(self.n_gram[word_comb][trigram_context])
 
     def find_ngrams(self, input_list, n):
         return list(zip(*[input_list[i:] for i in range(n)]))
