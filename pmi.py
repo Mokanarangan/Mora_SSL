@@ -49,6 +49,7 @@ class PMI():
         print('Extracting n-grams ...')
         self.n_gram = dict()
         self.graph_n_gram = dict()
+        total_count = defaultdict(0)
 
         final = self.train + self.test + self.un_labeled
         concat_list = self.find_ngrams(final, window)
@@ -73,7 +74,7 @@ class PMI():
             x3 = n_gram[1]['token']
             x4 = n_gram[2]['token']
             if word_comb not in self.n_gram:
-                self.n_gram[word_comb] = defaultdict(int)
+                self.n_gram[word_comb] = defaultdict(0)
             # Features
             trigram_context = x1 + x2 + x3 + x4 + x5
             trigram = x2 + x3 + x4
@@ -85,6 +86,7 @@ class PMI():
             left_context_right = x1 + x2 + x4
 
             self.n_gram[word_comb][trigram_context] += 1
+            total_count[trigram_context] += 1
             self.n_gram[word_comb][trigram] += 1
             self.n_gram[word_comb][left] += 1
             self.n_gram[word_comb][right] += 1
