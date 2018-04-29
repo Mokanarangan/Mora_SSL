@@ -50,7 +50,8 @@ class PMI():
         concat_list = self.find_ngrams(final, window)
         print('Total line count: %d' % len(final))
         for n_gram in concat_list:
-            word_comb = n_gram[0]['token']
+            word_comb = n_gram[0]['token'] + "|"
+                n_gram[1]['token'] + "|" + n_gram[2]['token']
             print(word_comb)
 
     def find_ngrams(self, input_list, n):
