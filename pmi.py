@@ -89,8 +89,15 @@ class PMI():
             left_context_right = x1 + x2 + x4
 
             self.n_gram[word_comb][trigram_context] += 1
-            print(word_comb)
-            print(self.n_gram[word_comb][trigram_context])
+            self.n_gram[word_comb][trigram] += 1
+            self.n_gram[word_comb][left] += 1
+            self.n_gram[word_comb][right] += 1
+            self.n_gram[word_comb][center] += 1
+            self.n_gram[word_comb][trigram_center] += 1
+            self.n_gram[word_comb][left_word_right] += 1
+            self.n_gram[word_comb][left_context_right] += 1
+
+        print('Features extracted')
 
     def find_ngrams(self, input_list, n):
         return list(zip(*[input_list[i:] for i in range(n)]))
