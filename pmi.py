@@ -1,9 +1,12 @@
+import math
+
+
 class PMI():
     """Subramany et al's PMI model
     """
 
     def __init__(self, dataset, BIO):
-        """Initiate 
+        """Initiate
         Arguments:
             train {string} -- train data path
             un_labeled {string} -- un_labeled data path
@@ -41,7 +44,11 @@ class PMI():
     def build_graph(self, window=3):
         """build the PMI graph
         """
-        print('Extracting n-grams...')
+        print('Extracting n-grams ...')
         self.n_gram = dict()
         final = self.train + self.test + self.un_labeled
-        print('Total line count: %d' % len(final))
+        concat_list = self.find_ngrams(final, window)
+        print('Total line count: %d' % len(concat_list))
+
+    def find_ngrams(self, input_list, n):
+        return zip(*[input_list[i:] for i in range(n)])
