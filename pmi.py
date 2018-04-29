@@ -63,6 +63,20 @@ class PMI():
             n_gram = concat_list[i]
             word_comb = n_gram[0]['token'] + "|" + \
                 n_gram[1]['token'] + "|" + n_gram[2]['token']
+            if(i == 0)
+                x1 = '<new>'
+            else:
+                x1 = concat_list[i - 1][2]['token']
+
+            if(i >= len(concat_list) - 1):
+                x5 = '<new>'
+            else:
+                x5 = concat_list[i + 1][2]['token']
+            x2 = n_gram[0]['token']
+            x3 = n_gram[1]['token']
+            x4 = n_gram[2]['token']
+            print("%s %s %s %s %s" % (x1, x2, x3, x4, x5))
+
             self.n_gram[word_comb] = True
 
     def find_ngrams(self, input_list, n):
