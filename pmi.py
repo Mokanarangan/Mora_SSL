@@ -47,8 +47,8 @@ class PMI():
         """build the PMI graph
         """
         print('Extracting n-grams ...')
-        self.n_gram = dict()
-        self.graph_n_gram = dict()
+        n_gram_total = dict()
+        graph_n_gram = dict()
         total_count = defaultdict(lambda: 0)
 
         final = self.train + self.test + self.un_labeled
@@ -73,8 +73,8 @@ class PMI():
             x2 = n_gram[0]['token']
             x3 = n_gram[1]['token']
             x4 = n_gram[2]['token']
-            if word_comb not in self.n_gram:
-                self.n_gram[word_comb] = defaultdict(lambda: 0)
+            if word_comb not in n_gram_total:
+                n_gram_total[word_comb] = defaultdict(lambda: 0)
             # Features
             trigram_context = x1 + x2 + x3 + x4 + x5
             trigram = x2 + x3 + x4
@@ -85,36 +85,35 @@ class PMI():
             left_word_right = x2 + x4 + x5
             left_context_right = x1 + x2 + x4
 
-            self.n_gram[word_comb][trigram_context] += 1
+            n_gram_total[word_comb][trigram_context] += 1
             total_count[trigram_context] += 1
-            self.n_gram[word_comb][trigram] += 1
+            n_gram_total[word_comb][trigram] += 1
             total_count[trigram] += 1
-            self.n_gram[word_comb][left] += 1
+            n_gram_total[word_comb][left] += 1
             total_count[left] += 1
-            self.n_gram[word_comb][right] += 1
+            n_gram_total[word_comb][right] += 1
             total_count[right] += 1
-            self.n_gram[word_comb][center] += 1
+            n_gram_total[word_comb][center] += 1
             total_count[center] += 1
-            self.n_gram[word_comb][trigram_center] += 1
+            n_gram_total[word_comb][trigram_center] += 1
             total_count[trigram_center] += 1
-            self.n_gram[word_comb][left_word_right] += 1
+            n_gram_total[word_comb][left_word_right] += 1
             total_count[left_word_right] += 1
-            self.n_gram[word_comb][left_context_right] += 1
+            n_gram_total[word_comb][left_context_right] += 1
             total_count[left_context_right] += 1
 
         print('Features extracted')
         print('Calculating PMI values')
 
-        for key in self.n_gram.keys():
-            for feat in self.n_gram[key].keys():
-                print(key, feat)
+        for key in n_gram_total.keys():
+            for feat in n_gram_total[key].keys():
 
         print('PMI values calculated')
 
         for n_gram in concat_graph_list:
             word_comb = n_gram[0]['token'] + "|" + \
                 n_gram[1]['token'] + "|" + n_gram[2]['token']
-            self.graph_n_gram[word_comb] = True
+            graph_n_gram[word_comb] = True
             count += 1
 
         print('Total ngram count: %d' % count)
