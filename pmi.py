@@ -120,15 +120,19 @@ class PMI():
                                    ((total_count[key] / total) * (total_count[key2] / total)), 2)
                 unique_graph[key][key2] = pmi_val
 
+        def distance_fun(x, y):
+            return 0
+        for i in range(0, len(unique_graph.keys())):
+            for j in range(0, i):
+                distance_fun(i, j)
+                # Here
+
         print('PMI values calculated')
 
         print('Total ngram count: %d' % count)
         print('Total unique ngram count: %d' % len(unique_graph.keys()))
         print('Calculating nearest neighbors..')
 
-        def distance_fun(x, y):
-            print(x, y)
-            return 0
         nbrs = NearestNeighbors(
             n_neighbors=4, algorithm='ball_tree', metric=distance_fun)
         # nbrs.fit(graph_list)
