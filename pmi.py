@@ -59,10 +59,11 @@ class PMI():
         print('Total ngram count: %d' % count)
         print('Total unique ngram count: %d' % len(self.graph_n_gram.keys()))
 
-        for n_gram in concat_list:
+        for i in range(0, len(concat_list)):
+            n_gram = concat_list[i]
             word_comb = n_gram[0]['token'] + "|" + \
                 n_gram[1]['token'] + "|" + n_gram[2]['token']
             self.n_gram[word_comb] = True
 
     def find_ngrams(self, input_list, n):
-        return zip(*[input_list[i:] for i in range(n)])
+        return list(zip(*[input_list[i:] for i in range(n)]))
