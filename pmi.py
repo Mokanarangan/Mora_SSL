@@ -54,6 +54,7 @@ class PMI():
         concat_list = self.find_ngrams(final, window)
         concat_graph_list = self.find_ngrams(self.test + self.train, window)
         count = 0
+        traverse_list = defaultdict(lambda: [])
         print('Extracting features')
 
         for i in range(0, len(concat_list)):
@@ -101,6 +102,16 @@ class PMI():
             n_gram_total[word_comb][left_context_right] += 1
             total_count[left_context_right] += 1
 
+            traverse_list[left] = traverse_list[left].append(word_comb)
+            traverse_list[right] = traverse_list[left].append(word_comb)
+            traverse_list[center] = traverse_list[left].append(word_comb)
+            traverse_list[trigram_center] = traverse_list[left].append(
+                word_comb)
+            traverse_list[left_word_right] = traverse_list[left].append(
+                word_comb)
+            traverse_list[left_context_right] = traverse_list[left].append(
+                word_comb)
+
         print('Features extracted')
         print('Calculating PMI values..')
 
@@ -123,10 +134,8 @@ class PMI():
 
         def distance_fun(x, y):
             return 0
-        for i in range(0, len(unique_graph.keys())):
-            for j in range(0, i):
-                distance_fun(i, j)
-                # Here
+        for key in traverse_list:
+            print(len(traverse_list[key]))
         print('Distance calculated')
 
         print('Total ngram count: %d' % count)
