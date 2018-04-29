@@ -66,7 +66,7 @@ class PMI():
             if(i == 0):
                 x1 = '<new>'
             else:
-                x1 = concat_list[i - 1][2]['token']
+                x1 = concat_list[i - 1][0]['token']
 
             if(i >= len(concat_list) - 1):
                 x5 = '<new>'
