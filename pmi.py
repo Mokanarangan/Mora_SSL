@@ -169,7 +169,10 @@ class PMI():
                 chunk_start, chunk_start + chunk_size)
             for i in range(0, len(cosine_similarity_chunk)):
                 arr = np.argsort(cosine_similarity_chunk[i])[:6]
-                connected_vertices.append(arr)
+                temp = []
+                for i in arr:
+                    temp.append(final_list[i])
+                connected_vertices.append(temp)
 
         print('Total ngram count: %d' % count)
         print('Total unique ngram count: %d' % len(unique_graph.keys()))
