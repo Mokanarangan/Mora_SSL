@@ -3,7 +3,7 @@ from sklearn.neighbors import NearestNeighbors
 from collections import defaultdict
 import numpy as np
 from scipy.sparse import lil_matrix
-from sklearn.metrics.pairwise import cosine_distances
+from scipy.spatial.distance import pdist
 
 
 class PMI():
@@ -145,7 +145,7 @@ class PMI():
                                    ((total_count[key] / total) * (total_count[key2] / total)), 2)
                 spr_matrix[i, feat_count[key2]] = pmi_val
         print('PMI values calculated')
-        distances = cosine_distances(spr_matrix)
+        distances = pdist(spr_matrix, 'cosine')
 
         print('Total ngram count: %d' % count)
         print('Total unique ngram count: %d' % len(unique_graph.keys()))
