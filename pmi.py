@@ -135,7 +135,7 @@ class PMI():
 
         spr_matrix = csr_matrix(
             (len(final_list), len(feat_count.keys()) + 1), dtype=np.float)
-        print('Sparse matrix shape: ' + spr_matrix.shape)
+        print(spr_matrix.shape)
 
         total = len(concat_list) * 8
         for i in range(0, len(final_list)):
