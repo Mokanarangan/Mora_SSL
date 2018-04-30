@@ -156,11 +156,8 @@ class PMI():
         for chunk_start in range(0, matrix_len, chunk_size):
             cosine_similarity_chunk = similarity_cosine_by_chunk(
                 chunk_start, chunk_start + chunk_size)
-            if similarity_matrix is None:
-                similarity_matrix = cosine_similarity_chunk
-            else:
-                similarity_matrix = np.concatenate(
-                    (similarity_matrix, cosine_similarity_chunk))
+            for row in cosine_similarity_chunk:
+                print(row)
 
         print('Total ngram count: %d' % count)
         print('Total unique ngram count: %d' % len(unique_graph.keys()))
