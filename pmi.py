@@ -118,6 +118,7 @@ class PMI():
         print('Calculating PMI values..')
 
         unique_graph = dict()
+        final_list = []
         feat_count = dict()
 
         for n_gram in concat_graph_list:
@@ -125,13 +126,20 @@ class PMI():
                 n_gram[1]['token'] + n_gram[2]['token']
             if word_comb not in unique_graph and word_comb in n_gram_total:
                 unique_graph[word_comb] = n_gram_total[word_comb]
+                final_list.append(
+                    {'ngram': word_comb, 'feat': n_gram_total[word_comb]})
                 for key in n_gram_total[word_comb].keys():
                     if key not in feat_count:
                         feat_count[key] = len(feat_count.keys())
             count += 1
 
+        spr_matrix = csr_matrix(
+            (len(final_list), len(feat_count.keys())), dtype=np.float)
+
         total = len(concat_list) * 8
-        for key in unique_graph.keys():
+        for i in range(0, len(final_list)):
+            key = final_list[i]['token']
+            print(key)
             for key2 in unique_graph[key].keys():
                 pmi_val = math.log((unique_graph[key][key2] / total) /
                                    ((total_count[key] / total) * (total_count[key2] / total)), 2)
