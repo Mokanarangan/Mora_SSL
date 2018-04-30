@@ -170,7 +170,7 @@ class PMI():
                 arr = np.argsort(cosine_similarity_chunk[i])[:6]
                 temp = []
                 for i in arr:
-                    temp.append(final_list[i])
+                    temp.append(final_list[i]['ngram'])
                 connected_vertices.append(temp)
         connected_vertices = np.array(connected_vertices)
 
