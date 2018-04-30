@@ -142,7 +142,7 @@ class PMI():
             for key2 in unique_graph[key].keys():
                 pmi_val = math.log((unique_graph[key][key2] / total) /
                                    ((total_count[key] / total) * (total_count[key2] / total)), 2)
-                spr_matrix[i, feat_count[key2]] = pmi_val
+                spr_matrix[i, feat_count[key2]] = pmi_val + 1
         print('PMI values calculated')
         chunk_size = 500
 
@@ -156,7 +156,7 @@ class PMI():
         for chunk_start in range(0, matrix_len, chunk_size):
             cosine_similarity_chunk = similarity_cosine_by_chunk(
                 chunk_start, chunk_start + chunk_size)
-            print(cosine_similarity_chunk)
+            print(cosine_similarity.shape)
 
         print('Total ngram count: %d' % count)
         print('Total unique ngram count: %d' % len(unique_graph.keys()))
