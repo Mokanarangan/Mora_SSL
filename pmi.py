@@ -129,7 +129,7 @@ class PMI():
                 final_list.append(
                     {'ngram': word_comb, 'feat': n_gram_total[word_comb]})
                 for key in n_gram_total[word_comb].keys():
-                    if key not in feat_count:
+                    if key not in feat_count.keys():
                         feat_count[key] = len(feat_count.keys())
             count += 1
 
