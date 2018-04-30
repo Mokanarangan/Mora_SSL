@@ -2,7 +2,7 @@ import math
 from sklearn.neighbors import NearestNeighbors
 from collections import defaultdict
 import numpy as np
-from scipy.sparse import csr_matrix
+from scipy.sparse import lil_matrix
 
 
 class PMI():
@@ -133,7 +133,7 @@ class PMI():
                         feat_count[key] = len(feat_count.keys())
             count += 1
 
-        spr_matrix = csr_matrix(
+        spr_matrix = lil_matrix(
             (len(final_list), len(feat_count.keys()) + 1), dtype=np.float)
 
         total = len(concat_list) * 8
@@ -142,8 +142,8 @@ class PMI():
             for key2 in unique_graph[key].keys():
                 pmi_val = math.log((unique_graph[key][key2] / total) /
                                    ((total_count[key] / total) * (total_count[key2] / total)), 2)
-                spr_matrix[i][feat_count[key2]] = pmi_val
                 print(i, feat_count[key2], pmi_val)
+                spr_matrix[i][feat_count[key2]] = pmi_val
         print('PMI values calculated')
 
         print('Total ngram count: %d' % count)
