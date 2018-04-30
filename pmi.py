@@ -50,7 +50,7 @@ class PMI():
     def build_graph(self, window=3):
         """build the PMI graph
         """
-        if os.path.isfile('pmi_graph.txt'):
+        if os.path.isfile('%s_pmi.pkl' % self.dataset):
             with open('%s_pmi.pkl' % self.dataset, "rb") as f:
                 print('Restoring from file')
                 return np.load(f)
@@ -175,7 +175,7 @@ class PMI():
         connected_vertices = np.array(connected_vertices)
 
         print('Total ngram count: %d' % count)
-        print('Total unique ngram count: %d' % len(unique_graph.keys()))
+        print('Total uique ngram count: %d' % len(unique_graph.keys()))
         print('Total feat count: %d' % len(feat_count.keys()))
         with open('%s_pmi.pkl' % self.dataset, "wb") as f:
             print('Saving graph to file')
