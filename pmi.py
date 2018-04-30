@@ -134,7 +134,7 @@ class PMI():
             count += 1
 
         spr_matrix = csr_matrix(
-            (len(final_list), len(feat_count.keys())), dtype=np.float)
+            (len(final_list), len(feat_count.keys() + 1)), dtype=np.float)
 
         total = len(concat_list) * 8
         for i in range(0, len(final_list)):
