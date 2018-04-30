@@ -157,9 +157,10 @@ class PMI():
         for chunk_start in range(0, matrix_len, chunk_size):
             cosine_similarity_chunk = similarity_cosine_by_chunk(
                 chunk_start, chunk_start + chunk_size)
-            arr = np.argsort(cosine_similarity_chunk, axis=1)
-            print(arr)
-            np.savetxt('test.txt', arr)
+            for i in range(0, len(cosine_similarity_chunk)):
+                arr = np.argsort(cosine_similarity_chunk[i], axis=1)[:5]
+                print(chunk_start + i)
+                print(arr)
 
         print('Total ngram count: %d' % count)
         print('Total unique ngram count: %d' % len(unique_graph.keys()))
