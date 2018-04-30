@@ -1,6 +1,8 @@
 import math
 from sklearn.neighbors import NearestNeighbors
 from collections import defaultdict
+import numpy as np
+from scipy.sparse import csr_matrix
 
 
 class PMI():
@@ -116,22 +118,23 @@ class PMI():
         print('Calculating PMI values..')
 
         unique_graph = dict()
+        feat_count = dict()
 
         for n_gram in concat_graph_list:
             word_comb = n_gram[0]['token'] + \
                 n_gram[1]['token'] + n_gram[2]['token']
             if word_comb not in unique_graph and word_comb in n_gram_total:
                 unique_graph[word_comb] = n_gram_total[word_comb]
+                for key in n_gram_total[word_comb].keys():
+                    if key not in feat_count:
+                        feat_count[key] = len(feat_count.keys())
             count += 1
 
         total = len(concat_list) * 8
-        feat_count = dict()
         for key in unique_graph.keys():
             for key2 in unique_graph[key].keys():
                 pmi_val = math.log((unique_graph[key][key2] / total) /
                                    ((total_count[key] / total) * (total_count[key2] / total)), 2)
-                print(key2)
-                feat_count[key2] = len(feat_count.keys())
                 unique_graph[key][key2] = pmi_val
         print('PMI values calculated')
 
