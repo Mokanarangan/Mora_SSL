@@ -198,8 +198,10 @@ class PMI():
                 x3 = '<new>'
 
             ngram = x1 + x2 + x3
+            count = 0
             if ngram not in connected:
-                print(ngram)
+                count += 1
+            print(count)
 
     def find_ngrams(self, input_list, n):
         return list(zip(*[input_list[i:] for i in range(n)]))
