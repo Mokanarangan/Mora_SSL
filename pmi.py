@@ -54,7 +54,7 @@ class PMI():
         if os.path.isfile('pmi_graph.txt'):
             with open('%s_pmi.pkl' % self.dataset, "rb") as f:
                 print('Restoring from file')
-                return pickle.load(f)
+                return np.load(f)
         print('Extracting n-grams ...')
         n_gram_total = dict()
         total_count = defaultdict(lambda: 0)
@@ -161,7 +161,7 @@ class PMI():
             return cosine_distances(X=spr_matrix[start:end], Y=spr_matrix)
         f = open('graph.txt', 'w')
 
-        connected_vertices = []
+        connected_vertices = np.array([])
 
         for chunk_start in range(0, matrix_len, chunk_size):
             print('Analyzing: %d' % chunk_start)
@@ -179,7 +179,7 @@ class PMI():
         print('Total feat count: %d' % len(feat_count.keys()))
         with open('%s_pmi.pkl' % self.dataset, "wb") as f:
             print('Saving graph to file')
-            pickle.dump(connected_vertices, f)
+            np.save(connected_vertices, f)
         return connected_vertices
 
     def find_ngrams(self, input_list, n):
