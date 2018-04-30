@@ -125,10 +125,12 @@ class PMI():
             count += 1
 
         total = len(concat_list) * 8
+        feat_count = dict()
         for key in unique_graph.keys():
             for key2 in unique_graph[key].keys():
                 pmi_val = math.log((unique_graph[key][key2] / total) /
                                    ((total_count[key] / total) * (total_count[key2] / total)), 2)
+                feat_count[key2] = len(feat_count.keys())
                 unique_graph[key][key2] = pmi_val
         print('PMI values calculated')
 
@@ -140,6 +142,7 @@ class PMI():
 
         print('Total ngram count: %d' % count)
         print('Total unique ngram count: %d' % len(unique_graph.keys()))
+        print('Total feat count: %d' % len(feat_count.keys()))
         print('Calculating nearest neighbors..')
 
         nbrs = NearestNeighbors(
