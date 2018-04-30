@@ -171,7 +171,7 @@ class PMI():
                 temp = []
                 for i in arr:
                     temp.append(final_list[i]['ngram'])
-                connected_vertices[temp[0]] = temp
+                connected_vertices[final_list[i + chunk_start]] = temp
 
         print('Total ngram count: %d' % count)
         print('Total uique ngram count: %d' % len(unique_graph.keys()))
