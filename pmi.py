@@ -143,7 +143,7 @@ class PMI():
             for key2 in unique_graph[key].keys():
                 pmi_val = math.log((unique_graph[key][key2] / total) /
                                    ((total_count[key] / total) * (total_count[key2] / total)), 2)
-                unique_graph[key][key2] = pmi_val
+                spr_matrix[i][feat_count[key]] = pmi_val
         print('PMI values calculated')
 
         def distance_fun(x, y):
@@ -155,6 +155,7 @@ class PMI():
         print('Total ngram count: %d' % count)
         print('Total unique ngram count: %d' % len(unique_graph.keys()))
         print('Total feat count: %d' % len(feat_count.keys()))
+        print('Sparse matrix shape %s' % spr_matrix.shape)
         print('Calculating nearest neighbors..')
 
         nbrs = NearestNeighbors(
