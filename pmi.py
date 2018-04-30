@@ -159,7 +159,6 @@ class PMI():
                 chunk_start, chunk_start + chunk_size)
             for i in range(0, len(cosine_similarity_chunk)):
                 arr = np.argsort(cosine_similarity_chunk[i])[:6]
-                print(final_list[chunk_start + i]['ngram'], end='\t')
                 for ind in arr:
                     print(final_list[ind]['ngram'], end='\t')
                 print()
