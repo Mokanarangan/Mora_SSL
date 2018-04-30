@@ -160,7 +160,7 @@ class PMI():
             return cosine_distances(X=spr_matrix[start:end], Y=spr_matrix)
         f = open('graph.txt', 'w')
 
-        connected_vertices = np.array([])
+        connected_vertices = []
 
         for chunk_start in range(0, matrix_len, chunk_size):
             print('Analyzing: %d' % chunk_start)
@@ -172,6 +172,7 @@ class PMI():
                 for i in arr:
                     temp.append(final_list[i])
                 connected_vertices.append(temp)
+        connected_vertices = np.array(connected_vertices)
 
         print('Total ngram count: %d' % count)
         print('Total unique ngram count: %d' % len(unique_graph.keys()))
