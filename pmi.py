@@ -194,7 +194,7 @@ class PMI():
             else:
                 x1 = '<new>'
             x2 = combined_list[ind]['token']
-            if(ind < len(self.train) - 1):
+            if(ind < len(combined_list) - 1):
                 x3 = combined_list[ind + 1]['token']
             else:
                 x3 = '<new>'
