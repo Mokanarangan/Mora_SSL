@@ -14,5 +14,4 @@ parser.add_argument(
 args = parser.parse_args()
 pmi = PMI(args.dataset, args.BIO)
 connected = pmi.build_graph()
-print(connected)
 pmi.propagate(connected)
