@@ -179,7 +179,7 @@ class PMI():
         print('Total feat count: %d' % len(feat_count.keys()))
         with open('%s_pmi.pkl' % self.dataset, "wb") as f:
             print('Saving graph to file')
-            np.save(connected_vertices, f)
+            np.save(f, connected_vertices)
         return connected_vertices
 
     def find_ngrams(self, input_list, n):
