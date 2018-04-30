@@ -154,14 +154,13 @@ class PMI():
             return cosine_similarity(X=spr_matrix[start:end], Y=spr_matrix)
 
         for chunk_start in range(0, matrix_len, chunk_size):
-            print(chunk_start)
             cosine_similarity_chunk = similarity_cosine_by_chunk(
                 chunk_start, chunk_start + chunk_size)
+            print(cosine_similarity)
 
         print('Total ngram count: %d' % count)
         print('Total unique ngram count: %d' % len(unique_graph.keys()))
         print('Total feat count: %d' % len(feat_count.keys()))
-        print('Sparse matrix shape %s' % spr_matrix.shape)
         print('Calculating nearest neighbors..')
 
     def find_ngrams(self, input_list, n):
