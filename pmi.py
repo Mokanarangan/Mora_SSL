@@ -158,7 +158,7 @@ class PMI():
             cosine_similarity_chunk = similarity_cosine_by_chunk(
                 chunk_start, chunk_start + chunk_size)
             for i in range(0, len(cosine_similarity_chunk)):
-                arr = np.argsort(cosine_similarity_chunk[i], axis=1)[:5]
+                arr = np.argsort(cosine_similarity_chunk[i])[:5]
                 print(chunk_start + i)
                 print(arr)
 
