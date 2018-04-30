@@ -143,6 +143,7 @@ class PMI():
                 pmi_val = math.log((unique_graph[key][key2] / total) /
                                    ((total_count[key] / total) * (total_count[key2] / total)), 2)
                 spr_matrix[i][feat_count[key2]] = pmi_val
+                print(i, feat_count[key2], pmi_val)
         print('PMI values calculated')
 
         print('Total ngram count: %d' % count)
