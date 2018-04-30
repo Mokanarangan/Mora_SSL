@@ -1,6 +1,8 @@
 import math
+import pickle
 from collections import defaultdict
 import numpy as np
+import os.path
 from scipy.sparse import lil_matrix
 from sklearn.neighbors import NearestNeighbors
 from sklearn.metrics.pairwise import cosine_distances
@@ -17,7 +19,7 @@ class PMI():
             un_labeled {string} -- un_labeled data path
             test {string} -- test data path
         """
-
+        self.dataset = dataset
         self.train = self._process_info('./data/' + dataset + '/train.txt')
         self.un_labeled = self._process_info(
             './data/' + dataset + '/un_labeled.txt')
@@ -49,6 +51,10 @@ class PMI():
     def build_graph(self, window=3):
         """build the PMI graph
         """
+        if os.path.isfile('pmi_graph.txt'):
+            with open('%s_pmi.pkl' % self.dataset, "rb") as f:
+                print('Restoring from file')
+                return pickle.load(f)
         print('Extracting n-grams ...')
         n_gram_total = dict()
         total_count = defaultdict(lambda: 0)
@@ -165,12 +171,13 @@ class PMI():
                 arr = np.argsort(cosine_similarity_chunk[i])[:6]
                 connected_vertices.append(arr)
 
-        print(connected_vertices)
-
         print('Total ngram count: %d' % count)
         print('Total unique ngram count: %d' % len(unique_graph.keys()))
         print('Total feat count: %d' % len(feat_count.keys()))
-        print('Calculating nearest neighbors..')
+        with open('%s_pmi.pkl' % self.dataset, "wb") as f:
+            print('Saving graph to file')
+            pickle.dump(connected_vertices, f)
+        return connected_vertices
 
     def find_ngrams(self, input_list, n):
         return list(zip(*[input_list[i:] for i in range(n)]))
