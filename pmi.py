@@ -145,6 +145,9 @@ class PMI():
                                    ((total_count[key] / total) * (total_count[key2] / total)), 2)
                 spr_matrix[i, feat_count[key2]] = pmi_val
         print('PMI values calculated')
+        nbrs = NearestNeighbors(
+            n_neighbors=5, algorithm='ball_tree').fit(spr_matrix)
+
         distances = cosine_distances(spr_matrix)
 
         print('Total ngram count: %d' % count)
