@@ -1,5 +1,4 @@
 import math
-import cPickle as pickle
 from collections import defaultdict
 import numpy as np
 import os.path
