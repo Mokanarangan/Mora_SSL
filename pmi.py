@@ -2,7 +2,7 @@ import math
 from collections import defaultdict
 import numpy as np
 from scipy.sparse import lil_matrix
-from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.metrics.pairwise import cosine_distances
 
 
 class PMI():
@@ -151,7 +151,7 @@ class PMI():
         def similarity_cosine_by_chunk(start, end):
             if end > matrix_len:
                 end = matrix_len
-            return cosine_similarity(X=spr_matrix[start:end], Y=spr_matrix)
+            return cosine_distances(X=spr_matrix[start:end], Y=spr_matrix)
 
         for chunk_start in range(0, matrix_len, chunk_size):
             cosine_similarity_chunk = similarity_cosine_by_chunk(
