@@ -154,6 +154,7 @@ class PMI():
             return cosine_similarity(X=spr_matrix[start:end], Y=spr_matrix)
 
         for chunk_start in xrange(0, matrix_len, chunk_size):
+            print(chunk_start)
             cosine_similarity_chunk = similarity_cosine_by_chunk(
                 chunk_start, chunk_start + chunk_size)
 
