@@ -152,15 +152,20 @@ class PMI():
             if end > matrix_len:
                 end = matrix_len
             return cosine_distances(X=spr_matrix[start:end], Y=spr_matrix)
-
+        similarity_matrix = None
         for chunk_start in range(0, matrix_len, chunk_size):
             cosine_similarity_chunk = similarity_cosine_by_chunk(
                 chunk_start, chunk_start + chunk_size)
-            print(cosine_similarity_chunk.shape)
+            if similarity_matrix is None:
+                similarity_matrix = cosine_similarity_chunk
+            else:
+                similarity_matrix = np.concatenate(
+                    (similarity_matrix, cosine_similarity_chunk))
 
         print('Total ngram count: %d' % count)
         print('Total unique ngram count: %d' % len(unique_graph.keys()))
         print('Total feat count: %d' % len(feat_count.keys()))
+        print('Similairity matrix size: ' + similarity_matrix.size)
         print('Calculating nearest neighbors..')
 
     def find_ngrams(self, input_list, n):
