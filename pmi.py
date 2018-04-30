@@ -200,7 +200,7 @@ class PMI():
                 x3 = '<new>'
             ngram = x1 + x2 + x3
             train_dict[ngram].append(ind)
-            if count not in connected:
+            if ngram not in connected:
                 count += 1
         print(count)
 
