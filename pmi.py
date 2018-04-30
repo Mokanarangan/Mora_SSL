@@ -138,7 +138,7 @@ class PMI():
 
         total = len(concat_list) * 8
         for i in range(0, len(final_list)):
-            key = final_list[i]['token']
+            key = final_list[i]['ngram']
             print(key)
             for key2 in unique_graph[key].keys():
                 pmi_val = math.log((unique_graph[key][key2] / total) /
