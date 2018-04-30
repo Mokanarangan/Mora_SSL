@@ -156,6 +156,7 @@ class PMI():
         f = open('graph.txt', 'w')
 
         for chunk_start in range(0, matrix_len, chunk_size):
+            print('Analyzing: %d' % chunk_start)
             cosine_similarity_chunk = similarity_cosine_by_chunk(
                 chunk_start, chunk_start + chunk_size)
             for i in range(0, len(cosine_similarity_chunk)):
