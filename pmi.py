@@ -181,8 +181,25 @@ class PMI():
             np.save(f, connected_vertices)
         return connected_vertices
 
-    def propagate(self):
+    def propagate(self, connected):
         print('Setup propagate')
+        total_size = len(self.train + self.test)
+        Graph = lil_matrix((total_size, total_size))
+        for ind in range(0, len(self.train)):
+            if(ind > 0):
+                x1 = self.train[ind - 1]['token']
+            else:
+                x1 = '<new>'
+            x2 = self.train[ind]['token']
+
+            if(ind < len(self.train) - 1):
+                x3 = self.train[ind + 1]['token']
+            else:
+                x3 = '<new>'
+
+            ngram = x1 + x2 + x3
+            if ngram not in connected:
+                print(ngram)
 
     def find_ngrams(self, input_list, n):
         return list(zip(*[input_list[i:] for i in range(n)]))
