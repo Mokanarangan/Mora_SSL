@@ -139,11 +139,10 @@ class PMI():
         total = len(concat_list) * 8
         for i in range(0, len(final_list)):
             key = final_list[i]['ngram']
-            print(key)
             for key2 in unique_graph[key].keys():
                 pmi_val = math.log((unique_graph[key][key2] / total) /
                                    ((total_count[key] / total) * (total_count[key2] / total)), 2)
-                spr_matrix[i][feat_count[key]] = pmi_val
+                spr_matrix[i][feat_count[key2]] = pmi_val
         print('PMI values calculated')
 
         def distance_fun(x, y):
