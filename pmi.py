@@ -155,15 +155,17 @@ class PMI():
             return cosine_distances(X=spr_matrix[start:end], Y=spr_matrix)
         f = open('graph.txt', 'w')
 
+        connected_vertices = []
+
         for chunk_start in range(0, matrix_len, chunk_size):
             print('Analyzing: %d' % chunk_start)
             cosine_similarity_chunk = similarity_cosine_by_chunk(
                 chunk_start, chunk_start + chunk_size)
             for i in range(0, len(cosine_similarity_chunk)):
                 arr = np.argsort(cosine_similarity_chunk[i])[:6]
-                for ind in arr:
-                    print(final_list[ind]['ngram'], end='\t', file=f)
-                print(file=f)
+                connected_vertices.append(arr)
+
+        print(connected_vertices)
 
         print('Total ngram count: %d' % count)
         print('Total unique ngram count: %d' % len(unique_graph.keys()))
