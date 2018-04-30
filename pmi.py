@@ -133,7 +133,7 @@ class PMI():
                         feat_count[key] = len(feat_count.keys())
             count += 1
 
-        spr_matrix = (
+        spr_matrix = lil_matrix(
             (len(final_list), len(feat_count.keys()) + 1), dtype=np.float)
 
         total = len(concat_list) * 8
