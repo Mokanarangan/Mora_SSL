@@ -161,7 +161,7 @@ class PMI():
                 arr = np.argsort(cosine_similarity_chunk[i])[:6]
                 print(final_list[chunk_start + i]['token'])
                 for ind in arr:
-                    print(final_list[ind][token])
+                    print(final_list[ind]['token'])
 
                 print('-----')
 
