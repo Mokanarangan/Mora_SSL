@@ -158,7 +158,6 @@ class PMI():
             if end > matrix_len:
                 end = matrix_len
             return cosine_distances(X=spr_matrix[start:end], Y=spr_matrix)
-        f = open('graph.txt', 'w')
 
         connected_vertices = dict()
 
@@ -169,8 +168,8 @@ class PMI():
             for i in range(0, len(cosine_similarity_chunk)):
                 arr = np.argsort(cosine_similarity_chunk[i])[:6]
                 temp = []
-                for i in arr:
-                    temp.append(final_list[i]['ngram'])
+                for j in arr:
+                    temp.append(final_list[j]['ngram'])
                 connected_vertices[final_list[i + chunk_start]['ngram']] = temp
 
         print('Total ngram count: %d' % count)
