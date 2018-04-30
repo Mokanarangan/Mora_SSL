@@ -145,21 +145,11 @@ class PMI():
                 spr_matrix[i][feat_count[key2]] = pmi_val
         print('PMI values calculated')
 
-        def distance_fun(x, y):
-            return 0
-        # for key in traverse_list:
-        #     print(len(traverse_list[key]))
-        print('Distance calculated')
-
         print('Total ngram count: %d' % count)
         print('Total unique ngram count: %d' % len(unique_graph.keys()))
         print('Total feat count: %d' % len(feat_count.keys()))
         print('Sparse matrix shape %s' % spr_matrix.shape)
         print('Calculating nearest neighbors..')
-
-        nbrs = NearestNeighbors(
-            n_neighbors=4, algorithm='ball_tree', metric=distance_fun)
-        # nbrs.fit(graph_list)
 
     def find_ngrams(self, input_list, n):
         return list(zip(*[input_list[i:] for i in range(n)]))
