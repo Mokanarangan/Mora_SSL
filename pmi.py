@@ -185,6 +185,7 @@ class PMI():
         print('Setup propagate')
         total_size = len(self.train + self.test)
         Graph = lil_matrix((total_size, total_size))
+        count = 0
         for ind in range(0, len(self.train)):
             if(ind > 0):
                 x1 = self.train[ind - 1]['token']
@@ -198,10 +199,9 @@ class PMI():
                 x3 = '<new>'
 
             ngram = x1 + x2 + x3
-            count = 0
             if ngram not in connected:
                 count += 1
-            print(count)
+        print(count)
 
     def find_ngrams(self, input_list, n):
         return list(zip(*[input_list[i:] for i in range(n)]))
