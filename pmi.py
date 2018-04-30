@@ -182,6 +182,7 @@ class PMI():
         return connected_vertices
 
     def propagate(self):
+        print('Setup propagate')
 
     def find_ngrams(self, input_list, n):
         return list(zip(*[input_list[i:] for i in range(n)]))
