@@ -171,7 +171,7 @@ class PMI():
         print('Drawing graph')
         f = open('graph.txt', 'w')
         for key in connected_vertices:
-            print(key + ' ' + connected_vertices[key], file=f)
+            print(key + ' ' + '|'.join(connected_vertices[key]), file=f)
         print('Graph drawn')
         print('Total ngram count: %d' % count)
         print('Total uique ngram count: %d' % len(unique_graph.keys()))
