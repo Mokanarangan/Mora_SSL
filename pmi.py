@@ -3,6 +3,7 @@ from collections import defaultdict
 import numpy as np
 import os.path
 from scipy.sparse import lil_matrix
+import pickle
 from sklearn.neighbors import NearestNeighbors
 from sklearn.metrics.pairwise import cosine_distances
 
@@ -50,10 +51,6 @@ class PMI():
     def build_graph(self, window=3):
         """build the PMI graph
         """
-        if os.path.isfile('%s_pmi.pkl' % self.dataset):
-            with open('%s_pmi.pkl' % self.dataset, "rb") as f:
-                print('Restoring from file')
-                return np.load(f)
         print('Extracting n-grams ...')
         n_gram_total = dict()
         total_count = defaultdict(lambda: 0)
@@ -175,9 +172,6 @@ class PMI():
         print('Total ngram count: %d' % count)
         print('Total uique ngram count: %d' % len(unique_graph.keys()))
         print('Total feat count: %d' % len(feat_count.keys()))
-        with open('%s_pmi.pkl' % self.dataset, "wb") as f:
-            print('Saving graph to file')
-            np.save(f, connected_vertices)
         return connected_vertices
 
     def propagate(self, connected):
