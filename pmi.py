@@ -57,7 +57,6 @@ class PMI():
 
         final = self.train + self.test + self.un_labeled
         concat_list = self.find_ngrams(final, window)
-        concat_graph_list = self.find_ngrams(self.test + self.train, window)
         count = 0
         traverse_list = defaultdict(list)
         print('Extracting features')
@@ -124,7 +123,7 @@ class PMI():
         final_list = []
         feat_count = dict()
 
-        for n_gram in concat_graph_list:
+        for n_gram in concat_list:
             word_comb = n_gram[0]['token'] + \
                 n_gram[1]['token'] + n_gram[2]['token']
             if word_comb not in unique_graph and word_comb in n_gram_total:
