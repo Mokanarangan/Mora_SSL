@@ -63,8 +63,8 @@ class PMI():
 
         for i in range(0, len(concat_list)):
             n_gram = concat_list[i]
-            word_comb = n_gram[0]['token'] + \
-                n_gram[1]['token'] + n_gram[2]['token']
+            word_comb = ' '.join[n_gram[0]['token'],
+                                 n_gram[1]['token'], n_gram[2]['token']]
             if(i == 0):
                 x1 = '<new>'
             else:
@@ -80,14 +80,14 @@ class PMI():
             if word_comb not in n_gram_total:
                 n_gram_total[word_comb] = defaultdict(lambda: 0)
             # Features
-            trigram_context = x1 + x2 + x3 + x4 + x5
-            trigram = x2 + x3 + x4
-            left = x1 + x2
-            right = x4 + x5
+            trigram_context = ' '.join([x1, x2, x3, x4, x5])
+            trigram = ' '.join([x2, x3, x4])
+            left = ' '.join([x1, x2])
+            right = ' '.join([x4, x5])
             center = x2
-            trigram_center = x2 + x4
-            left_word_right = x2 + x4 + x5
-            left_context_right = x1 + x2 + x4
+            trigram_center = ' '.join([x2, x4])
+            left_word_right = ' '.join([x2, x4, x5])
+            left_context_right = ' '.join([x1, x2, x4])
 
             n_gram_total[word_comb][trigram_context] += 1
             total_count[trigram_context] += 1
@@ -124,8 +124,8 @@ class PMI():
         feat_count = dict()
 
         for n_gram in concat_list:
-            word_comb = n_gram[0]['token'] + \
-                n_gram[1]['token'] + n_gram[2]['token']
+            word_comb = ' '.join([n_gram[0]['token'],
+                                  n_gram[1]['token'], n_gram[2]['token']])
             if word_comb not in unique_graph and word_comb in n_gram_total:
                 unique_graph[word_comb] = n_gram_total[word_comb]
                 final_list.append(
@@ -193,7 +193,7 @@ class PMI():
                 x3 = self.train[ind + 1]['token']
             else:
                 x3 = '<new>'
-            ngram = x1 + x2 + x3
+            ngram = ' '.join([x1, x2, x3])
             train_dict[ngram].append(ind)
             if ngram not in connected:
                 count += 1
