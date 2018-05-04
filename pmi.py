@@ -63,8 +63,8 @@ class PMI():
 
         for i in range(0, len(concat_list)):
             n_gram = concat_list[i]
-            word_comb = ' '.join[n_gram[0]['token'],
-                                 n_gram[1]['token'], n_gram[2]['token']]
+            word_comb = ' '.join([n_gram[0]['token'],
+                                  n_gram[1]['token'], n_gram[2]['token']])
             if(i == 0):
                 x1 = '<new>'
             else:
