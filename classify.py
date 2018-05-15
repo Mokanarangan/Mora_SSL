@@ -15,6 +15,7 @@ class Classifier():
         """
         print('Processing the classifier')
         self.dataset = dataset
+        self.BIO = BIO
         self.graph = self._process_graph('./data/' + dataset + '/graph.txt')
         self.train = self._process_info('./data/' + dataset + '/train.txt')
         self.test = self._process_info('./data/' + dataset + '/test.txt')
@@ -72,6 +73,9 @@ class Classifier():
                 data.append({'token': '<new>', 'tag': tag})
                 continue
             if len(split) > 1:
-                tag = split[1]
+                if(self.BIO & & tag != 'O'):
+                    tag = split[1].split('-')[1]
+                else:
+                    tag = split[1]
             data.append({'token': split[0], 'tag': tag})
         return data
