@@ -18,7 +18,7 @@ class Classifier():
         self.BIO = BIO
         self.graph = self._process_graph('./data/' + dataset + '/graph.txt')
         self.train = self._process_info('./data/' + dataset + '/train.txt')
-        self.test = self._process_info('./data/' + dataset + '/test.txt')
+        self.test = self._process_info('./data/' + dataset + '/test.txt', True)
         self.un_labeled = self._process_info(
             './data/' + dataset + '/un_labeled.txt')
 
@@ -28,6 +28,7 @@ class Classifier():
         total = self.train + self.test + self.un_labeled
         total_size = len(total)
         Graph = lil_matrix((total_size, total_size))
+        ngram_dict = dict()
         for ind in range(0, len(total)):
             if(ind > 0):
                 x1 = total[ind - 1]['token']
@@ -35,13 +36,19 @@ class Classifier():
                 x1 = '<new>'
             x2 = total[ind]['token']
             tag = total[ind]['tag']
+            test = total[ind]['test']
             if(ind < len(total) - 1):
                 x3 = total[ind + 1]['token']
             else:
                 x3 = '<new>'
             ngram = ' '.join([x1, x2, x3])
-            if(ngram not in self.graph):
-                print(ngram)
+            ngram_dict[ngram] = {'token': x2, 'tag': tag, 'test': test}
+
+        for node in self.graph:
+            if(node in ngram_dict):
+                print(ngram_dict[node])
+                for connected in self.graph[node]:
+                    print(ngram_dict[connected], end=' ')
 
     def _process_graph(self, file_name):
         """Process the created in the graph file
@@ -57,7 +64,7 @@ class Classifier():
                     graph_dict[node].append(ngram)
         return graph_dict
 
-    def _process_info(self, file_name):
+    def _process_info(self, file_name, test=False):
         """Process data and stores in variable.
         File should be in 'X X' format
         Arguments:
@@ -70,12 +77,12 @@ class Classifier():
             split = line.split()
             tag = None
             if line in ['\n', '\r\n']:
-                data.append({'token': '<new>', 'tag': tag})
+                data.append({'token': '<new>', 'tag': tag, 'test': test})
                 continue
             if len(split) > 1:
                 if(self.BIO and split[1] != 'O'):
                     tag = split[1].split('-')[1]
                 else:
                     tag = split[1]
-            data.append({'token': split[0], 'tag': tag})
+            data.append({'token': split[0], 'tag': tag, 'test': test})
         return data
