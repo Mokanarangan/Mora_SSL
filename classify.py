@@ -35,6 +35,7 @@ class Classifier():
         ngram_dict = dict()
         ngram_index_dict = dict()
         tag_dict = dict()
+        tag_inv_dict = dict()
         tag_count = 0
         for ind in range(0, len(total)):
             if(ind > 0):
@@ -52,11 +53,11 @@ class Classifier():
             ngram = ' '.join([x1, x2, x3])
             if(tag not in tag_dict):
                 tag_dict[tag] = tag_count
+                tag_inv_dict[tag_count] = tag
                 tag_count += 1
             ngram_dict[ngram] = {'index': ind,
                                  'token': x2, 'tag': tag_dict[tag], 'test': test, 'train': train}
             ngram_index_dict[ind] = {'tag': tag, 'token': x2}
-        print(tag_dict)
         x_train = []
         y_train = []
         x_test = []
@@ -78,7 +79,7 @@ class Classifier():
         y_predict = clf.predict(np.array(x_test))
         for ind in range(0, len(x_test)):
             elm = ngram_index_dict[x_test[ind]]
-            print(elm['token'], elm['tag'], tag_dict[y_predict[ind]])
+            print(elm['token'], elm['tag'], tag_inv_dict[y_predict[ind]])
 
     def _process_graph(self, file_name):
         """Process the created in the graph file
