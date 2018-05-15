@@ -39,6 +39,7 @@ class Classifier():
                 ngram = split_list[ind]
                 if(node != ngram):
                     graph_dict[node].append(ngram)
+        return graph_dict
 
     def _ngram(self, data):
         """Setup the ngram
