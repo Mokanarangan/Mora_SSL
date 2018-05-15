@@ -42,7 +42,6 @@ class Classifier():
             else:
                 x1 = '<new>'
             x2 = total[ind]['token']
-            print(x2)
             tag = total[ind]['tag']
             test = total[ind]['test']
             train = total[ind]['train']
@@ -56,7 +55,7 @@ class Classifier():
                 tag_count += 1
             ngram_dict[ngram] = {'index': ind,
                                  'token': x2, 'tag': tag_dict[tag], 'test': test, 'train': train}
-            ngram_index_dict[ind] = {'tag': tag, 'token': 'x2'}
+            ngram_index_dict[ind] = {'tag': tag, 'token': x2}
         x_train = []
         y_train = []
         x_test = []
