@@ -71,15 +71,14 @@ class Classifier():
         x_test = []
         y_test = []
         print('Fitting graph')
-        if('told Reuters .' in self.graph):
-            print('its here')
         for node in self.graph:
             if(node in ngram_dict):
                 index_arr = ngram_dict[node]['index']
+                if(ngram_dict[node]['token'] == 'Reuters'):
+                    print(ngram_dict[node], node)
                 for index in index_arr:
                     if(ngram_dict[node]['train']):
-                        if(ngram_dict[node]['token'] == 'Reuters'):
-                            print(ngram_dict[node], node)
+
                         x_train.append(index)
                         y_train.append(ngram_dict[node]['tag'])
                     elif(ngram_dict[node]['test']):
