@@ -51,7 +51,7 @@ class Classifier():
             if(node in ngram_dict):
                 index = ngram_dict[node]['index']
                 for connected in self.graph[node]:
-                    Graph[index, ngram_dict[connected]] = 1
+                    Graph[index, ngram_dict[connected]['index']] = 1
 
     def _process_graph(self, file_name):
         """Process the created in the graph file
