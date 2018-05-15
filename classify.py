@@ -27,7 +27,7 @@ class Classifier():
         total = self.train + self.test + self.un_labeled
         total_size = len(total)
         Graph = lil_matrix((total_size, total_size))
-        for ind in range(0, len(self.test)):
+        for ind in range(0, len(total)):
             if(ind > 0):
                 x1 = total[ind - 1]['token']
             else:
