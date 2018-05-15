@@ -33,6 +33,8 @@ class Classifier():
         Graph = lil_matrix((total_size, total_size))
         ngram_dict = dict()
         ngram_index_dict = dict()
+        tag_dict = dict()
+        tag_count = 0
         for ind in range(0, len(total)):
             if(ind > 0):
                 x1 = total[ind - 1]['token']
@@ -47,8 +49,11 @@ class Classifier():
             else:
                 x3 = '<new>'
             ngram = ' '.join([x1, x2, x3])
+            if(tag not in tag_dict):
+                tag_dict[tag] = tag_count
+                tag_count += 1
             ngram_dict[ngram] = {'index': ind,
-                                 'token': x2, 'tag': tag, 'test': test, 'train': train}
+                                 'token': x2, 'tag': tag_dict[tag], 'test': test, 'train': train}
             ngram_index_dict[ind] = {'tag': tag, 'token': 'x2'}
         x_train = []
         y_train = []
