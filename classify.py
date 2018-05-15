@@ -55,8 +55,14 @@ class Classifier():
                 tag_dict[tag] = tag_count
                 tag_inv_dict[tag_count] = tag
                 tag_count += 1
-            ngram_dict[ngram] = {'index': ind,
-                                 'token': x2, 'tag': tag_dict[tag], 'test': test, 'train': train}
+            setup = {
+                'token': x2, 'tag': tag_dict[tag], 'test': test, 'train': train}
+            if(ngram in ngram_dict):
+                setup['index'] = ngram_dict[ngram]['index'].append(ind)
+            else:
+                setup['index'] = [ind]
+
+            ngram_dict[ngram] = setup
             ngram_index_dict[ind] = {'tag': tag, 'token': x2}
         x_train = []
         y_train = []
@@ -65,15 +71,16 @@ class Classifier():
         tmp = open('t.txt', 'w')
         for node in self.graph:
             if(node in ngram_dict):
-                index = ngram_dict[node]['index']
-                if(ngram_dict[node]['train']):
-                    x_train.append(index)
-                    y_train.append(ngram_dict[node]['tag'])
-                elif(ngram_dict[node]['test']):
-                    x_test.append(index)
-                    y_test.append(ngram_dict[node]['tag'])
-                for connected in self.graph[node]:
-                    Graph[index, ngram_dict[connected]['index']] = 1
+                index_arr = ngram_dict[node]['index']
+                for index in index_arr:
+                    if(ngram_dict[node]['train']):
+                        x_train.append(index)
+                        y_train.append(ngram_dict[node]['tag'])
+                    elif(ngram_dict[node]['test']):
+                        x_test.append(index)
+                        y_test.append(ngram_dict[node]['tag'])
+                    for connected in self.graph[node]:
+                        Graph[index, ngram_dict[connected]['index']] = 1
         clf = LGC(graph=Graph, max_iter=1000)
         clf.fit(np.array(x_train), np.array(y_train))
         y_predict = clf.predict(np.array(x_test))
