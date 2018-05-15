@@ -77,7 +77,8 @@ class Classifier():
         y_predict = clf.predict(np.array(x_test))
         for ind in x_test:
             elm = ngram_index_dict[ind]
-            print(elm['token'], elm['tag'], tag_dict[y_predict[ind]])
+            print(y_predict[ind])
+            # print(elm['token'], elm['tag'], tag_dict[])
 
     def _process_graph(self, file_name):
         """Process the created in the graph file
