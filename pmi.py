@@ -57,38 +57,38 @@ class PMI():
 
         final = self.train + self.test + self.un_labeled
         concat_list = self.find_ngrams(final, window)
-        print(concat_list)
-        count = 0
-        traverse_list = defaultdict(list)
+        print(concat_list[0]
+        count=0
+        traverse_list=defaultdict(list)
         print('Extracting features')
 
         for i in range(0, len(concat_list)):
-            n_gram = concat_list[i]
-            word_comb = ' '.join([n_gram[0]['token'],
+            n_gram=concat_list[i]
+            word_comb=' '.join([n_gram[0]['token'],
                                   n_gram[1]['token'], n_gram[2]['token']])
             if(i == 0):
-                x1 = '<new>'
+                x1='<new>'
             else:
-                x1 = concat_list[i - 1][0]['token']
+                x1=concat_list[i - 1][0]['token']
 
             if(i >= len(concat_list) - 1):
-                x5 = '<new>'
+                x5='<new>'
             else:
-                x5 = concat_list[i + 1][2]['token']
-            x2 = n_gram[0]['token']
-            x3 = n_gram[1]['token']
-            x4 = n_gram[2]['token']
+                x5=concat_list[i + 1][2]['token']
+            x2=n_gram[0]['token']
+            x3=n_gram[1]['token']
+            x4=n_gram[2]['token']
             if word_comb not in n_gram_total:
-                n_gram_total[word_comb] = defaultdict(lambda: 0)
+                n_gram_total[word_comb]=defaultdict(lambda: 0)
             # Features
-            trigram_context = ' '.join([x1, x2, x3, x4, x5])
-            trigram = ' '.join([x2, x3, x4])
-            left = ' '.join([x1, x2])
-            right = ' '.join([x4, x5])
-            center = x2
-            trigram_center = ' '.join([x2, x4])
-            left_word_right = ' '.join([x2, x4, x5])
-            left_context_right = ' '.join([x1, x2, x4])
+            trigram_context=' '.join([x1, x2, x3, x4, x5])
+            trigram=' '.join([x2, x3, x4])
+            left=' '.join([x1, x2])
+            right=' '.join([x4, x5])
+            center=x2
+            trigram_center=' '.join([x2, x4])
+            left_word_right=' '.join([x2, x4, x5])
+            left_context_right=' '.join([x1, x2, x4])
 
             n_gram_total[word_comb][trigram_context] += 1
             total_count[trigram_context] += 1
@@ -120,56 +120,56 @@ class PMI():
         print('Features extracted')
         print('Calculating PMI values..')
 
-        unique_graph = dict()
-        final_list = []
-        feat_count = dict()
+        unique_graph=dict()
+        final_list=[]
+        feat_count=dict()
 
         for n_gram in concat_list:
-            word_comb = ' '.join([n_gram[0]['token'],
+            word_comb=' '.join([n_gram[0]['token'],
                                   n_gram[1]['token'], n_gram[2]['token']])
             if word_comb not in unique_graph and word_comb in n_gram_total:
-                unique_graph[word_comb] = n_gram_total[word_comb]
+                unique_graph[word_comb]=n_gram_total[word_comb]
                 final_list.append(
                     {'ngram': word_comb, 'feat': n_gram_total[word_comb]})
                 for key in n_gram_total[word_comb].keys():
                     if key not in feat_count:
-                        feat_count[key] = len(feat_count.keys())
+                        feat_count[key]=len(feat_count.keys())
             count += 1
 
-        spr_matrix = lil_matrix(
+        spr_matrix=lil_matrix(
             (len(final_list), len(feat_count.keys()) + 1), dtype=np.float)
 
-        total = len(concat_list) * 8
+        total=len(concat_list) * 8
         for i in range(0, len(final_list)):
-            key = final_list[i]['ngram']
+            key=final_list[i]['ngram']
             for key2 in unique_graph[key].keys():
-                pmi_val = math.log((unique_graph[key][key2] / total) /
+                pmi_val=math.log((unique_graph[key][key2] / total) /
                                    ((total_count[key] / total) * (total_count[key2] / total)), 2)
-                spr_matrix[i, feat_count[key2]] = pmi_val + 1
+                spr_matrix[i, feat_count[key2]]=pmi_val + 1
         print('PMI values calculated')
-        chunk_size = 500
+        chunk_size=500
 
-        matrix_len = spr_matrix.shape[0]  # Not sparse numpy.ndarray
+        matrix_len=spr_matrix.shape[0]  # Not sparse numpy.ndarray
 
         def similarity_cosine_by_chunk(start, end):
             if end > matrix_len:
-                end = matrix_len
+                end=matrix_len
             return cosine_distances(X=spr_matrix[start:end], Y=spr_matrix)
 
-        connected_vertices = dict()
+        connected_vertices=dict()
 
         for chunk_start in range(0, matrix_len, chunk_size):
             print('Analyzing: %d' % chunk_start)
-            cosine_similarity_chunk = similarity_cosine_by_chunk(
+            cosine_similarity_chunk=similarity_cosine_by_chunk(
                 chunk_start, chunk_start + chunk_size)
             for i in range(0, len(cosine_similarity_chunk)):
-                arr = np.argsort(cosine_similarity_chunk[i])[:6]
-                temp = []
+                arr=np.argsort(cosine_similarity_chunk[i])[:6]
+                temp=[]
                 for j in arr:
                     temp.append(final_list[j]['ngram'])
-                connected_vertices[final_list[i + chunk_start]['ngram']] = temp
+                connected_vertices[final_list[i + chunk_start]['ngram']]=temp
         print('Drawing graph')
-        f = open('./data/' + self.dataset + '/graph.txt', 'w')
+        f=open('./data/' + self.dataset + '/graph.txt', 'w')
         for key in connected_vertices:
             print(key + '<|>' + '<|>'.join(connected_vertices[key]), file=f)
         print('Graph drawn')
