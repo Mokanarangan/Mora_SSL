@@ -30,7 +30,7 @@ class Classifier():
         """
         f = open(file_name)
         for line in f:
-            split_list = line.split("|")
+            split_list = line.split("<|>")
             if(len(split_list) != 7):
                 print(line)
 

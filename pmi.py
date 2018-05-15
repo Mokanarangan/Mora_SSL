@@ -168,9 +168,9 @@ class PMI():
                     temp.append(final_list[j]['ngram'])
                 connected_vertices[final_list[i + chunk_start]['ngram']] = temp
         print('Drawing graph')
-        f = open('graph.txt', 'w')
+        f = open('./data/' + self.dataset + '/graph.txt', 'w')
         for key in connected_vertices:
-            print(key + '|' + '|'.join(connected_vertices[key]), file=f)
+            print(key + '<|>' + '<|>'.join(connected_vertices[key]), file=f)
         print('Graph drawn')
         print('Total ngram count: %d' % count)
         print('Total uique ngram count: %d' % len(unique_graph.keys()))
