@@ -19,3 +19,4 @@ pmi = PMI(args.dataset)
 
 # Performs classification
 classifier = Classifier(args.dataset, args.BIO)
+classifier.classify()
