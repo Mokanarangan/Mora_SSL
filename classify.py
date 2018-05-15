@@ -61,6 +61,8 @@ class Classifier():
                 arr = ngram_dict[ngram]['index']
                 arr.append(ind)
                 setup['index'] = arr
+                if(x2 == 'Reuters'):
+                    print(ngram_dict[ngram], ngram)
             else:
                 setup['index'] = [ind]
             ngram_dict[ngram] = setup
