@@ -2,7 +2,7 @@
 """
 from scipy.sparse import lil_matrix
 from collections import defaultdict
-from label_propagation import LGC
+from label_propagation import LGC, HMN
 import numpy as np
 
 
@@ -95,7 +95,7 @@ class Classifier():
                         Graph[index, ngram_dict[connected]['index']] = 1
         print(len(x_train), len(x_test))
         print('Classifying')
-        clf = LGC(graph=Graph, max_iter=1000)
+        clf = HMN(graph=Graph, max_iter=1000)
         clf.fit(np.array(x_train), np.array(y_train))
         y_predict = clf.predict(np.array(x_test))
         print('Predicting')
