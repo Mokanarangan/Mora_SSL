@@ -40,8 +40,8 @@ class Classifier():
             else:
                 x3 = '<new>'
             ngram = ' '.join([x1, x2, x3])
-            if(tag != None):
-                print(ngram, tag)
+            if(ngram not in self.graph):
+                print(ngram)
 
     def _process_graph(self, file_name):
         """Process the created in the graph file
