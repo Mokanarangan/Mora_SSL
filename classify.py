@@ -20,7 +20,8 @@ class Classifier():
         self.graph = self._process_graph('./data/' + dataset + '/graph.txt')
         self.train = self._process_info(
             './data/' + dataset + '/train.txt', False, True)
-        self.test = self._process_info('./data/' + dataset + '/test.txt', True)
+        self.test = self._process_info(
+            './data/' + dataset + '/test.txt', True, False)
         self.un_labeled = self._process_info(
             './data/' + dataset + '/un_labeled.txt')
 
