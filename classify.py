@@ -108,7 +108,7 @@ class Classifier():
                 ngram = split_list[ind]
                 if(node != ngram):
                     graph_dict[node].append(ngram.replace('\n', ''))
-        if('told Reuters .' in graph_dict)
+        if('told Reuters .' in graph_dict):
             print('its here')
         return graph_dict
 
