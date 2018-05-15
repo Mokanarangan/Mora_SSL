@@ -12,7 +12,7 @@ class PMI():
     """Subramany et al's PMI model
     """
 
-    def __init__(self, dataset, BIO):
+    def __init__(self, dataset):
         """Initiate
         Arguments:
             train {string} -- train data path
@@ -176,28 +176,6 @@ class PMI():
         print('Total uique ngram count: %d' % len(unique_graph.keys()))
         print('Total feat count: %d' % len(feat_count.keys()))
         return connected_vertices
-
-    def propagate(self, connected):
-        print('Setup propagate')
-        total_size = len(self.train + self.test)
-        Graph = lil_matrix((total_size, total_size))
-        count = 0
-        train_dict = defaultdict(lambda: [])
-        for ind in range(0, len(self.train)):
-            if(ind > 0):
-                x1 = self.train[ind - 1]['token']
-            else:
-                x1 = '<new>'
-            x2 = self.train[ind]['token']
-            if(ind < len(self.train) - 1):
-                x3 = self.train[ind + 1]['token']
-            else:
-                x3 = '<new>'
-            ngram = ' '.join([x1, x2, x3])
-            train_dict[ngram].append(ind)
-            if ngram not in connected:
-                count += 1
-        print(count)
 
     def find_ngrams(self, input_list, n):
         return list(zip(*[input_list[i:] for i in range(n)]))

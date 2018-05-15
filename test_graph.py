@@ -1,5 +1,6 @@
 import argparse
 from pmi import PMI
+from classify import Classifier
 
 parser = argparse.ArgumentParser()
 
@@ -12,6 +13,9 @@ parser.add_argument(
 )
 
 args = parser.parse_args()
-pmi = PMI(args.dataset, args.BIO)
-connected = pmi.build_graph()
-pmi.propagate(connected)
+# Build the graph
+pmi = PMI(args.dataset)
+# connected = pmi.build_graph()
+
+# Performs classification
+classifier = Classifier(args.dataset, args.BIO)
