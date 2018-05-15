@@ -19,4 +19,4 @@ connected = pmi.build_graph()
 
 # Performs classification
 classifier = Classifier(args.dataset, args.BIO)
-# classifier.classify()
+classifier.classify()

@@ -57,7 +57,6 @@ class PMI():
 
         final = self.train + self.test + self.un_labeled
         concat_list = self.find_ngrams(final, window)
-        print(concat_list[0])
         count = 0
         traverse_list = defaultdict(list)
         print('Extracting features')
