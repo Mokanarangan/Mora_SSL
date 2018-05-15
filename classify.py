@@ -13,8 +13,10 @@ class Classifier():
             un_labeled {string} -- un_labeled data path
             test {string} -- test data path
         """
+        print('Processing the classifier')
         self.dataset = dataset
         self.graph = self._process_graph('./data/' + dataset + '/graph.txt')
+        print(self.graph)
         self.train = self._process_info('./data/' + dataset + '/train.txt')
         self.test = self._process_info('./data/' + dataset + '/test.txt')
 
@@ -29,10 +31,14 @@ class Classifier():
         """Process the created in the graph file
         """
         f = open(file_name)
+        graph_dict = defaultdict(lambda: [])
         for line in f:
             split_list = line.split("<|>")
-            if(len(split_list) != 7):
-                print(line)
+            node = split_list[0]
+            for ind in range(1, len(split_list)):
+                ngram = split_list[ind]
+                if(node != ngram):
+                    graph_dict[node].append(ngram)
 
     def _ngram(self, data):
         """Setup the ngram
