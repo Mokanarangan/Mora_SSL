@@ -63,7 +63,7 @@ class Classifier():
             for ind in range(1, len(split_list)):
                 ngram = split_list[ind]
                 if(node != ngram):
-                    graph_dict[node].append(ngram)
+                    graph_dict[node].append(ngram.replace('\n', ''))
         return graph_dict
 
     def _process_info(self, file_name, test=False):
@@ -87,5 +87,5 @@ class Classifier():
                 else:
                     tag = split[1]
             data.append(
-                {'token': split[0], 'tag': tag.replace('\n', ''), 'test': test})
+                {'token': split[0], 'tag': tag, 'test': test})
         return data
