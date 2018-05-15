@@ -29,6 +29,7 @@ class Classifier():
         total_size = len(total)
         Graph = lil_matrix((total_size, total_size))
         ngram_dict = dict()
+        ngram_index_dict = dict()
         for ind in range(0, len(total)):
             if(ind > 0):
                 x1 = total[ind - 1]['token']
@@ -42,14 +43,15 @@ class Classifier():
             else:
                 x3 = '<new>'
             ngram = ' '.join([x1, x2, x3])
-            ngram_dict[ngram] = {'token': x2, 'tag': tag, 'test': test}
+            ngram_dict[ngram] = {'index': ind,
+                                 'token': x2, 'tag': tag, 'test': test}
+            ngram_index_dict[ind] = {'tag': tag, 'token': 'x2'}
 
         for node in self.graph:
             if(node in ngram_dict):
-                index = ngram_dict[node]
-                print(index)
-                # for connected in self.graph[node]:
-                # if connected in ngram_dict:
+                index = ngram_dict[node]['index']
+                for connected in self.graph[node]:
+                    Graph[index, ngram_dict[connected]] = 1
 
     def _process_graph(self, file_name):
         """Process the created in the graph file
