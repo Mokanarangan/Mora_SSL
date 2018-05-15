@@ -58,7 +58,6 @@ class PMI():
         final = self.train + self.test + self.un_labeled
         concat_list = self.find_ngrams(final, window)
         count = 0
-        traverse_list = defaultdict(list)
         print('Extracting features')
 
         for i in range(0, len(concat_list)):
@@ -105,16 +104,6 @@ class PMI():
             total_count[left_word_right] += 1
             n_gram_total[word_comb][left_context_right] += 1
             total_count[left_context_right] += 1
-
-            traverse_list[left].append(word_comb)
-            traverse_list[right].append(word_comb)
-            traverse_list[center].append(word_comb)
-            traverse_list[trigram_center].append(
-                word_comb)
-            traverse_list[left_word_right].append(
-                word_comb)
-            traverse_list[left_context_right].append(
-                word_comb)
 
         print('Features extracted')
         print('Calculating PMI values..')
