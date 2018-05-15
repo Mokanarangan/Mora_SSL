@@ -184,12 +184,12 @@ class PMI():
             if(ind > 0):
                 x1 = input_list[ind - 1]
             else:
-                x1 = '<new>'
+                x1 = {'token': '<new>', 'tag': None}
             x2 = input_list[ind]
             if(ind < len(input_list) - 1):
                 x3 = input_list[ind + 1]
             else:
-                x3 = '<new>'
+                x3 = {'token': '<new>', 'tag': None}
             l.append((x1, x2, x3))
         return l
 
