@@ -60,14 +60,13 @@ class Classifier():
                 index = ngram_dict[node]['index']
                 if(ngram_dict[node]['train']):
                     x_train.append(index)
-                    print(ngram_dict[node]['token'],
-                          ngram_dict[node]['tag'], file=tmp)
                 elif(ngram_dict[node]['test']):
                     x_test.append(index)
                 for connected in self.graph[node]:
                     Graph[index, ngram_dict[connected]['index']] = 1
         print(len(x_train), len(x_test))
         clf = LGC(graph=Graph, max_iter=1000)
+        clf.fit(x_train, y_train)
 
     def _process_graph(self, file_name):
         """Process the created in the graph file
