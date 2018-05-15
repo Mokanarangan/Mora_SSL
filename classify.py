@@ -48,7 +48,7 @@ class Classifier():
             if(node in ngram_dict):
                 print(ngram_dict[node])
                 for connected in self.graph[node]:
-                    if connected not in ngram_dict:
+                    if connected in ngram_dict:
                         print(connected)
             # print(ngram_dict[connected], end=' ')
 
