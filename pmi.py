@@ -189,7 +189,5 @@ class PMI():
                 x3 = input_list[ind + 1]
             else:
                 x3 = '<new>'
-            print(x1, x2, x3)
-            ngram = ' '.join([x1, x2, x3])
-            ngram_list.append(ngram)
+            ngram_list.append([x1, x2, x3])
         return ngram_list
