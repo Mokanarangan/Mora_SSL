@@ -81,13 +81,16 @@ class Classifier():
         for node in self.graph:
             if(node in ngram_dict):
                 index_arr = ngram_dict[node]['index']
-                for index in index_arr:
-                    if(ngram_dict[node]['train']):
+                train_arr = ngram_dict[node]['train']
+                test_arr = ngram_dict[node]['test']
+                for ind in range(0, len(index_arr)):
+                    index = index_arr[ind]
+                    if(train_arr[ind]):
                         if(ngram_dict[node]['token'] == 'Reuters'):
                             print(ngram_dict[node], node)
                         x_train.append(index)
                         y_train.append(ngram_dict[node]['tag'])
-                    elif(ngram_dict[node]['test']):
+                    elif(test_arr[ind]):
                         x_test.append(index)
                         y_test.append(ngram_dict[node]['tag'])
                     for connected in self.graph[node]:
