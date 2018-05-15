@@ -60,7 +60,6 @@ class Classifier():
             if(ngram in ngram_dict):
                 arr = ngram_dict[ngram]['index']
                 arr.append(ind)
-                print(ngram, setup)
                 setup['index'] = arr
             else:
                 setup['index'] = [ind]
@@ -90,9 +89,9 @@ class Classifier():
         y_predict = clf.predict(np.array(x_test))
         for ind in x_train:
             print(ngram_index_dict[ind])
-        for ind in range(0, len(x_test)):
-            elm = ngram_index_dict[x_test[ind]]
-            print(elm['token'], elm['tag'], tag_inv_dict[y_predict[ind]])
+        # for ind in range(0, len(x_test)):
+            # elm = ngram_index_dict[x_test[ind]]
+            # print(elm['token'], elm['tag'], tag_inv_dict[y_predict[ind]])
 
     def _process_graph(self, file_name):
         """Process the created in the graph file
