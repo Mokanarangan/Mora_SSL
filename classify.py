@@ -61,8 +61,7 @@ class Classifier():
                 arr = ngram_dict[ngram]['index']
                 arr.append(ind)
                 setup['index'] = arr
-                if(x2 == 'Reuters'):
-                    print(ngram_dict[ngram], ngram)
+
             else:
                 setup['index'] = [ind]
             ngram_dict[ngram] = setup
@@ -77,6 +76,8 @@ class Classifier():
                 index_arr = ngram_dict[node]['index']
                 for index in index_arr:
                     if(ngram_dict[node]['train']):
+                        if(ngram_dict[node]['token'] == 'Reuters'):
+                            print(ngram_dict[node])
                         x_train.append(index)
                         y_train.append(ngram_dict[node]['tag'])
                     elif(ngram_dict[node]['test']):
