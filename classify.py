@@ -22,7 +22,6 @@ class Classifier():
             './data/' + dataset + '/train.txt', False, True)
         self.test = self._process_info(
             './data/' + dataset + '/test.txt', True, False)
-        print(self.test)
         self.un_labeled = self._process_info(
             './data/' + dataset + '/un_labeled.txt')
 
@@ -42,7 +41,7 @@ class Classifier():
             x2 = total[ind]['token']
             tag = total[ind]['tag']
             test = total[ind]['test']
-            train = total[ind]['test']
+            train = total[ind]['train']
             if(ind < len(total) - 1):
                 x3 = total[ind + 1]['token']
             else:
@@ -60,7 +59,7 @@ class Classifier():
                 index = ngram_dict[node]['index']
                 if(ngram_dict[node]['train']):
                     x_train.append(index)
-                    # print(ngram_dict[node]['token'], ngram_dict[node]['tag'])
+                    print(ngram_dict[node]['token'], ngram_dict[node]['tag'])
                 elif(ngram_dict[node]['test']):
                     x_test.append(index)
                 for connected in self.graph[node]:
