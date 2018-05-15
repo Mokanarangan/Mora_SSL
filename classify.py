@@ -37,8 +37,6 @@ class Classifier():
                 x3 = '<new>'
             ngram = ' '.join([x1, x2, x3])
             train_dict[ngram].append(ind)
-            if ngram not in connected:
-                count += 1
         print(count)
 
     def _process_info(self, file_name):
