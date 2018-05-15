@@ -83,6 +83,9 @@ class Classifier():
                 index_arr = ngram_dict[node]['index']
                 train_arr = ngram_dict[node]['train']
                 test_arr = ngram_dict[node]['test']
+                token = ngram_dict[node]['token']
+                if(token == '<new>'):
+                    continue
                 for ind in range(0, len(index_arr)):
                     index = index_arr[ind]
                     if(train_arr[ind]):
