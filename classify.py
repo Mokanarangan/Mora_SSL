@@ -103,9 +103,15 @@ class Classifier():
         for ind in x_train:
             print(ind, ngram_index_dict[ind])
         x_test.sort()
-        # for ind in range(0, len(x_test)):
-        #     elm = ngram_index_dict[x_test[ind]]
-        #     print(elm['token'], elm['tag'], tag_inv_dict[y_predict[ind]])
+        total = 0
+        correct = 0
+        for ind in range(0, len(x_test)):
+            elm = ngram_index_dict[x_test[ind]]
+            print(elm['token'], elm['tag'], tag_inv_dict[y_predict[ind]])
+            if(elm['tag'] == tag_inv_dict[ind]):
+                correct += 1
+
+        print(correct / total)
 
     def _process_graph(self, file_name):
         """Process the created in the graph file
