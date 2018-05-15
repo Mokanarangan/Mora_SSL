@@ -47,7 +47,7 @@ class Classifier():
         for node in self.graph:
             if(node in ngram_dict):
                 print(ngram_dict[node])
-                for connected.trim() in self.graph[node]:
+                for connected in self.graph[node]:
                     if connected not in ngram_dict:
                         print(connected)
             # print(ngram_dict[connected], end=' ')
@@ -86,5 +86,6 @@ class Classifier():
                     tag = split[1].split('-')[1]
                 else:
                     tag = split[1]
-            data.append({'token': split[0], 'tag': tag, 'test': test})
+            data.append(
+                {'token': split[0], 'tag': tag.replace('\n', ''), 'test': test})
         return data
