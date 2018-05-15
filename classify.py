@@ -70,7 +70,6 @@ class Classifier():
         y_train = []
         x_test = []
         y_test = []
-        tmp = open('t.txt', 'w')
         print('Fitting graph')
         for node in self.graph:
             if(node in ngram_dict):
@@ -84,6 +83,7 @@ class Classifier():
                         y_test.append(ngram_dict[node]['tag'])
                     for connected in self.graph[node]:
                         Graph[index, ngram_dict[connected]['index']] = 1
+        print(len(x_train), len(x_test))
         print('Classifying')
         clf = LGC(graph=Graph, max_iter=1000)
         clf.fit(np.array(x_train), np.array(y_train))
