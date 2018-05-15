@@ -33,12 +33,13 @@ class Classifier():
             else:
                 x1 = '<new>'
             x2 = total[ind]['token']
+            tag = total[ind]['tag']
             if(ind < len(total) - 1):
                 x3 = total[ind + 1]['token']
             else:
                 x3 = '<new>'
             ngram = ' '.join([x1, x2, x3])
-            print(ngram)
+            print(ngram, tag)
 
     def _process_graph(self, file_name):
         """Process the created in the graph file
