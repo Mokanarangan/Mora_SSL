@@ -60,7 +60,7 @@ class Classifier():
                 index = ngram_dict[node]['index']
                 if(ngram_dict[node]['train']):
                     x_train.append(index)
-                    print(ngram_dict[node]['token'], ngram_dict[node]['tag'])
+                    # print(ngram_dict[node]['token'], ngram_dict[node]['tag'])
                 elif(ngram_dict[node]['test']):
                     x_test.append(index)
                 for connected in self.graph[node]:
