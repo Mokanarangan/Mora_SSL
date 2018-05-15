@@ -56,14 +56,21 @@ class Classifier():
                 tag_inv_dict[tag_count] = tag
                 tag_count += 1
             setup = {'ngram': ngram,
-                     'token': x2, 'tag': tag_dict[tag], 'test': test, 'train': train}
+                     'token': x2, 'tag': tag_dict[tag]}
             if(ngram in ngram_dict):
                 arr = ngram_dict[ngram]['index']
+                test_arr = ngram_dict[ngram]['test']
+                train_arr = ngram_dict[ngram]['train']
                 arr.append(ind)
+                test_arr.append(test)
+                train_arr.append(train)
                 setup['index'] = arr
-
+                setup['test'] = arr
+                setup['train'] = arr
             else:
                 setup['index'] = [ind]
+                setup['test'] = [test]
+                setup['train'] = [train]
             ngram_dict[ngram] = setup
             ngram_index_dict[ind] = {'tag': tag, 'token': x2}
         x_train = []
@@ -74,11 +81,10 @@ class Classifier():
         for node in self.graph:
             if(node in ngram_dict):
                 index_arr = ngram_dict[node]['index']
-                if(ngram_dict[node]['token'] == 'Reuters'):
-                    print(ngram_dict[node], node)
                 for index in index_arr:
                     if(ngram_dict[node]['train']):
-
+                        if(ngram_dict[node]['token'] == 'Reuters'):
+                            print(ngram_dict[node], node)
                         x_train.append(index)
                         y_train.append(ngram_dict[node]['tag'])
                     elif(ngram_dict[node]['test']):
