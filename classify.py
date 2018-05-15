@@ -56,6 +56,7 @@ class Classifier():
             ngram_dict[ngram] = {'index': ind,
                                  'token': x2, 'tag': tag_dict[tag], 'test': test, 'train': train}
             ngram_index_dict[ind] = {'tag': tag, 'token': x2}
+        print(tag_dict)
         x_train = []
         y_train = []
         x_test = []
