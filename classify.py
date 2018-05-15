@@ -73,7 +73,7 @@ class Classifier():
                 data.append({'token': '<new>', 'tag': tag})
                 continue
             if len(split) > 1:
-                if(self.BIO & & tag != 'O'):
+                if(self.BIO and tag != 'O'):
                     tag = split[1].split('-')[1]
                 else:
                     tag = split[1]
