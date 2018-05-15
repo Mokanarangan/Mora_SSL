@@ -57,6 +57,7 @@ class PMI():
 
         final = self.train + self.test + self.un_labeled
         concat_list = self.find_ngrams(final, window)
+        print(concat_list)
         count = 0
         traverse_list = defaultdict(list)
         print('Extracting features')
@@ -178,4 +179,17 @@ class PMI():
         return connected_vertices
 
     def find_ngrams(self, input_list, n):
+        # l = []
+        # for ind in range(0, len(input_list)):
+        #     if(ind > 0):
+        #         x1 = input_list[ind - 1]
+        #     else:
+        #         x1 = '<new>'
+        #     x2 = input_list[ind]
+        #     if(ind < len(input_list) - 1):
+        #         x3 = input_list[ind + 1]
+        #     else:
+        #         x3 = '<new>'
+        #     ngram = ' '.join([x1, x2, x3])
+
         return list(zip(*[input_list[i:] for i in range(n)]))
