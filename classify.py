@@ -62,6 +62,7 @@ class Classifier():
                 elif(ngram_dict[node]['test']):
                     x_test.append(index)
                     print(ngram_dict[node]['token'], ngram_dict[node]['tag'])
+                    break
                 for connected in self.graph[node]:
                     Graph[index, ngram_dict[connected]['index']] = 1
         print(len(x_train), len(x_test))
