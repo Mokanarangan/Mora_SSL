@@ -58,10 +58,10 @@ class Classifier():
             setup = {
                 'token': x2, 'tag': tag_dict[tag], 'test': test, 'train': train}
             if(ngram in ngram_dict):
+                print(ngram_dict[ngram])
                 setup['index'] = ngram_dict[ngram]['index'].append(ind)
             else:
                 setup['index'] = [ind]
-
             ngram_dict[ngram] = setup
             ngram_index_dict[ind] = {'tag': tag, 'token': x2}
         x_train = []
