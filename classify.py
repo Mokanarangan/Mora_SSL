@@ -65,8 +65,8 @@ class Classifier():
                 test_arr.append(test)
                 train_arr.append(train)
                 setup['index'] = arr
-                setup['test'] = arr
-                setup['train'] = arr
+                setup['test'] = test_arr
+                setup['train'] = train_arr
             else:
                 setup['index'] = [ind]
                 setup['test'] = [test]
