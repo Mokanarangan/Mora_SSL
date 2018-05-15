@@ -99,9 +99,6 @@ class Classifier():
         clf.fit(np.array(x_train), np.array(y_train))
         y_predict = clf.predict(np.array(x_test))
         print('Predicting')
-        x_train.sort()
-        for ind in x_train:
-            print(ind, ngram_index_dict[ind])
         x_test.sort()
         total = 0
         correct = 0
