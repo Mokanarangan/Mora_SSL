@@ -46,11 +46,10 @@ class Classifier():
 
         for node in self.graph:
             if(node in ngram_dict):
-                print(ngram_dict[node])
-                for connected in self.graph[node]:
-                    if connected in ngram_dict:
-                        print(connected)
-            # print(ngram_dict[connected], end=' ')
+                index = ngram_dict[node]
+                print(index)
+                # for connected in self.graph[node]:
+                # if connected in ngram_dict:
 
     def _process_graph(self, file_name):
         """Process the created in the graph file
