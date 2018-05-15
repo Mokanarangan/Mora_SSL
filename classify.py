@@ -60,6 +60,7 @@ class Classifier():
             if(ngram in ngram_dict):
                 arr = ngram_dict[ngram]['index']
                 arr.append(ind)
+                print(ngram, setup)
                 setup['index'] = arr
             else:
                 setup['index'] = [ind]
