@@ -105,7 +105,7 @@ class Classifier():
         for ind in range(0, len(x_test)):
             elm = ngram_index_dict[x_test[ind]]
             print(elm['token'], elm['tag'], tag_inv_dict[y_predict[ind]])
-            if(elm['tag'] == tag_inv_dict[ind]):
+            if(elm['tag'] == tag_inv_dict[y_predict[ind]]):
                 correct += 1
 
         print(correct / total)
