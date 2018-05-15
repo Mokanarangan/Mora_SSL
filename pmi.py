@@ -190,7 +190,6 @@ class PMI():
                 x3 = input_list[ind + 1]
             else:
                 x3 = '<new>'
-            ngram = ' '.join([x1, x2, x3])
             l.append((x1, x2, x3))
         return l
 
