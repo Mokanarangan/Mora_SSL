@@ -46,13 +46,13 @@ class Classifier():
                 print('here')
             ngram_dict[ngram] = {'token': x2, 'tag': tag, 'test': test}
 
-        for node in self.graph:
-            if(node in ngram_dict):
-                print(ngram_dict[node])
-                for connected in self.graph[node]:
-                    if connected not in ngram_dict:
-                        print(connected)
-                    # print(ngram_dict[connected], end=' ')
+        # for node in self.graph:
+        #     if(node in ngram_dict):
+        #         print(ngram_dict[node])
+        #         for connected in self.graph[node]:
+        #             if connected not in ngram_dict:
+        #                 print(connected)
+            # print(ngram_dict[connected], end=' ')
 
     def _process_graph(self, file_name):
         """Process the created in the graph file
