@@ -39,7 +39,7 @@ class Classifier():
             else:
                 x3 = '<new>'
             ngram = ' '.join([x1, x2, x3])
-            if(tag != None):
+            if(tag != None and tag != 'O'):
                 print(ngram, tag)
 
     def _process_graph(self, file_name):
