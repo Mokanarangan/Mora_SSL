@@ -98,6 +98,7 @@ class Classifier():
         clf = LGC(graph=Graph, max_iter=1000)
         clf.fit(np.array(x_train), np.array(y_train))
         y_predict = clf.predict(np.array(x_test))
+        print(ngram_index_dict[20031])
         for ind in x_train:
             print(ngram_index_dict[ind])
         # for ind in range(0, len(x_test)):
