@@ -42,6 +42,7 @@ class Classifier():
             else:
                 x1 = '<new>'
             x2 = total[ind]['token']
+            print(x2)
             tag = total[ind]['tag']
             test = total[ind]['test']
             train = total[ind]['train']
