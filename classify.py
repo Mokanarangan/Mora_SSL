@@ -39,7 +39,8 @@ class Classifier():
             else:
                 x3 = '<new>'
             ngram = ' '.join([x1, x2, x3])
-            print(ngram, tag)
+            if(tag != None):
+                print(ngram, tag)
 
     def _process_graph(self, file_name):
         """Process the created in the graph file
