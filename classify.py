@@ -86,8 +86,6 @@ class Classifier():
                 for ind in range(0, len(index_arr)):
                     index = index_arr[ind]
                     if(train_arr[ind]):
-                        if(ngram_dict[node]['token'] == 'Reuters'):
-                            print(ngram_dict[node], node)
                         x_train.append(index)
                         y_train.append(ngram_dict[node]['tag'])
                     elif(test_arr[ind]):
