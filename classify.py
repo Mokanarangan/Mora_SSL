@@ -42,6 +42,8 @@ class Classifier():
             else:
                 x3 = '<new>'
             ngram = ' '.join([x1, x2, x3])
+            if(ngram == 'long-distance operator and')
+                print('here')
             ngram_dict[ngram] = {'token': x2, 'tag': tag, 'test': test}
 
         for node in self.graph:
