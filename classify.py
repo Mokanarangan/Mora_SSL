@@ -32,7 +32,7 @@ class Classifier():
         for line in f:
             split_list = line.split("|")
             if(len(split_list) != 7):
-                print('here')
+                print(line)
 
     def _ngram(self, data):
         """Setup the ngram
