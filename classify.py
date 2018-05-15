@@ -27,7 +27,7 @@ class Classifier():
         total = self.train + self.test + self.un_labeled
         total_size = len(total)
         Graph = lil_matrix((total_size, total_size))
-        for ind in range(0, len(total)):
+        for ind in range(0, len(self.test)):
             if(ind > 0):
                 x1 = total[ind - 1]['token']
             else:
@@ -39,7 +39,7 @@ class Classifier():
             else:
                 x3 = '<new>'
             ngram = ' '.join([x1, x2, x3])
-            if(tag != None and tag != 'O'):
+            if(tag != None):
                 print(ngram, tag)
 
     def _process_graph(self, file_name):
