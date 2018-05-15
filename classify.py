@@ -98,9 +98,10 @@ class Classifier():
         clf = LGC(graph=Graph, max_iter=1000)
         clf.fit(np.array(x_train), np.array(y_train))
         y_predict = clf.predict(np.array(x_test))
-        for ind in x_train.sort():
+        x_train.sort()
+        for ind in x_train:
             print(ind, ngram_index_dict[ind])
-        x_test = x_test.sort()
+        x_test.sort()
         for ind in range(0, len(x_test)):
             elm = ngram_index_dict[x_test[ind]]
             print(elm['token'], elm['tag'], tag_inv_dict[y_predict[ind]])
