@@ -42,16 +42,14 @@ class Classifier():
             else:
                 x3 = '<new>'
             ngram = ' '.join([x1, x2, x3])
-            if(ngram == 'long-distance operator and'):
-                print('here')
             ngram_dict[ngram] = {'token': x2, 'tag': tag, 'test': test}
 
-        # for node in self.graph:
-        #     if(node in ngram_dict):
-        #         print(ngram_dict[node])
-        #         for connected in self.graph[node]:
-        #             if connected not in ngram_dict:
-        #                 print(connected)
+        for node in self.graph:
+            if(node in ngram_dict):
+                print(ngram_dict[node])
+                for connected.trim() in self.graph[node]:
+                    if connected not in ngram_dict:
+                        print(connected)
             # print(ngram_dict[connected], end=' ')
 
     def _process_graph(self, file_name):
