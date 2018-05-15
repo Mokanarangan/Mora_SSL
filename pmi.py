@@ -179,17 +179,19 @@ class PMI():
         return connected_vertices
 
     def find_ngrams(self, input_list, n):
-        # l = []
-        # for ind in range(0, len(input_list)):
-        #     if(ind > 0):
-        #         x1 = input_list[ind - 1]
-        #     else:
-        #         x1 = '<new>'
-        #     x2 = input_list[ind]
-        #     if(ind < len(input_list) - 1):
-        #         x3 = input_list[ind + 1]
-        #     else:
-        #         x3 = '<new>'
-        #     ngram = ' '.join([x1, x2, x3])
+        l = []
+        for ind in range(0, len(input_list)):
+            if(ind > 0):
+                x1 = input_list[ind - 1]
+            else:
+                x1 = '<new>'
+            x2 = input_list[ind]
+            if(ind < len(input_list) - 1):
+                x3 = input_list[ind + 1]
+            else:
+                x3 = '<new>'
+            ngram = ' '.join([x1, x2, x3])
+            l.append((x1, x2, x3))
+        return l
 
-        return list(zip(*[input_list[i:] for i in range(n)]))
+        # return list(zip(*[input_list[i:] for i in range(n)]))
