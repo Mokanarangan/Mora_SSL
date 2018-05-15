@@ -55,8 +55,8 @@ class Classifier():
                 tag_dict[tag] = tag_count
                 tag_inv_dict[tag_count] = tag
                 tag_count += 1
-            setup = {
-                'token': x2, 'tag': tag_dict[tag], 'test': test, 'train': train}
+            setup = {'ngram': ngram,
+                     'token': x2, 'tag': tag_dict[tag], 'test': test, 'train': train}
             if(ngram in ngram_dict):
                 arr = ngram_dict[ngram]['index']
                 arr.append(ind)
