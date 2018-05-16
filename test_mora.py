@@ -31,7 +31,7 @@ parser.add_argument(
 args = parser.parse_args()
 # Build the graph
 pmi = Mora(args.dataset, args.embeddings)
-# connected = pmi.build_graph()
+connected = pmi.build_graph()
 # Performs classification
 # classifier = Classifier(args.dataset, args.BIO)
 # classifier.classify()
