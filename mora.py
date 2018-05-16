@@ -65,14 +65,15 @@ class Mora(Graph):
         def similarity_by_chunk(start, end):
             if end > matrix_len:
                 end = matrix_len
-            # return euclidean_distances(X=embedding_list[start:end], Y=embedding_list)
-            return cdist(embedding_list[start:end], embedding_list, 'euclidean')
+            return euclidean_distances(X=embedding_list[start:end], Y=embedding_list)
+            # return cdist(embedding_list[start:end], embedding_list, 'euclidean')
 
         connected_vertices = dict()
         for chunk_start in range(0, matrix_len, chunk_size):
             logging.info('Analyzing: %d' % chunk_start)
             similarity_chunk = similarity_by_chunk(
                 chunk_start, chunk_start + chunk_size)
+            logging.info('Sorting: %d' % chunk_start)
             for i in range(0, len(similarity_chunk)):
                 arr = np.argsort(similarity_chunk[i])[:6]
                 temp = []
