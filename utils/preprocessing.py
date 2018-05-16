@@ -4,6 +4,7 @@ import logging
 import gzip
 import deepdish as dd
 import os.path
+import pickle
 
 
 def wordNormalize(word):
@@ -73,8 +74,17 @@ def readEmbeddings(embeddingsPath, dataset):
     # Extend embeddings file with new tokens
     embeddings = np.array(embeddings)
     logging.info('Embedding Read')
-    dd.io.save('./pkl/' + dataset + '.h5',
-               {'embeddings': embeddings, 'word2Idx': word2Idx})
+    save_obj({'embeddings': embeddings, 'word2Idx': word2Idx}, dataset)
 
     logging.info('Embedding Saved')
     return embeddings, word2Idx
+
+
+def save_obj(obj, name):
+    with open('pkl/' + name + '.pkl', 'wb') as f:
+        pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
+
+
+def load_obj(name):
+    with open('pkl/' + name + '.pkl', 'rb') as f:
+        return pickle.load(f)
