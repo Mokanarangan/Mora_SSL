@@ -15,4 +15,6 @@ class Mora(Graph):
         logging.info('Initiating build vector graph..')
         final = self.train + self.test + self.un_labeled
         concat_list = self.find_ngrams(final, window)
-        print(concat_list[0])
+        print(self.word2Idx[concat_list[0][0]['token']])
+        # for i in range(0, len(concat_list)):
+        # n_gram = concat_list[i]
