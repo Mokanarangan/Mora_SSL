@@ -83,8 +83,6 @@ class Mora(Graph):
             print(key + '<|>' + '<|>'.join(connected_vertices[key]), file=f)
         logging.info('Graph drawn')
 
-        print(matrix_len)
-
     def _get_embeddings(self, token):
         if token not in self.word2Idx:
             token = 'UNKNOWN_TOKEN'
