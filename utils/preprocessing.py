@@ -67,6 +67,7 @@ def readEmbeddings(embeddingsPath, dataset):
 
         if len(neededVocab) == 0 or word in neededVocab:
             if word not in word2Idx:
+                print('.', end='')
                 embeddings.append(vector)
                 word2Idx[word] = len(word2Idx)
 
