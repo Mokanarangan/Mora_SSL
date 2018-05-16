@@ -3,6 +3,7 @@ import numpy as np
 import logging
 import gzip
 import deepdish as dd
+import os.path
 
 
 def wordNormalize(word):
@@ -22,13 +23,16 @@ def readEmbeddings(embeddingsPath, dataset):
     :param embeddingsPath: File path to pretrained embeddings
     :return:
     """
-    logging.info("Generate new embeddings files for a dataset")
 
     neededVocab = {}
     # :: Read in word embeddings ::
     logging.info("Read file: %s" % embeddingsPath)
     word2Idx = {}
     embeddings = []
+    if os.path.exists('./pkl/' + dataset + '.h5'):
+        logging.info('Loading from existing file')
+        return dd.io.load('./pkl/' + dataset + '.h5')
+    logging.info("Generate new embeddings files for a dataset")
 
     embeddingsIn = gzip.open(embeddingsPath, "rt") if embeddingsPath.endswith('.gz') else open(embeddingsPath,
                                                                                                encoding="utf8")
