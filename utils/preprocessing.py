@@ -31,7 +31,8 @@ def readEmbeddings(embeddingsPath, dataset):
     embeddings = []
     if os.path.exists('./pkl/' + dataset + '.h5'):
         logging.info('Loading from existing file')
-        return dd.io.load('./pkl/' + dataset + '.h5')
+        tmp = dd.io.load('./pkl/' + dataset + '.h5')
+        return tmp['embeddings'], tmp['word2Idx']
     logging.info("Generate new embeddings files for a dataset")
 
     embeddingsIn = gzip.open(embeddingsPath, "rt") if embeddingsPath.endswith('.gz') else open(embeddingsPath,
