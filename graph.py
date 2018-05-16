@@ -20,7 +20,7 @@ class Graph():
         logging.info('Number of Test lines: %d' % len(self.test))
         logging.info('Number of Unlabeled lines: %d' % len(self.un_labeled))
 
-    def _process_info(self, file_name):
+    def _process_info(self, file_name, test=False, train=False):
         """Process data and stores in variable.
         File should be in 'X X' format
         Arguments:
@@ -33,11 +33,13 @@ class Graph():
             split = line.split()
             tag = None
             if line in ['\n', '\r\n']:
-                data.append({'token': '</s>', 'tag': tag})
+                data.append({'token': '</s>', 'tag': tag,
+                             'test': test, 'train': train})
                 continue
             if len(split) > 1:
                 tag = split[1]
-            data.append({'token': split[0], 'tag': tag})
+            data.append(
+                {'token': split[0], 'tag': tag, 'test': test, 'train': train})
         return data
 
     def find_ngrams(self, input_list, n):
