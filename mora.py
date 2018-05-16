@@ -67,21 +67,21 @@ class Mora(Graph):
             return euclidean_distances(X=embedding[start:end], Y=embedding)
 
         connected_vertices = dict()
-        for chunk_start in range(0, matrix_len, chunk_size):
-            logging.info('Analyzing: %d' % chunk_start)
-            similarity_chunk = similarity_by_chunk(
-                chunk_start, chunk_start + chunk_size)
-            for i in range(0, len(similarity_chunk)):
-                arr = np.argsort(similarity_chunk[i])[:6]
-                temp = []
-                for j in arr:
-                    temp.append(ngram_dict[j]['ngram'])
-                connected_vertices[ngram_dict[i + chunk_start]['ngram']] = temp
-        logging.info('Drawing graph')
-        f = open('./data/' + self.dataset + '/graph_mora.txt', 'w')
-        for key in connected_vertices:
-            print(key + '<|>' + '<|>'.join(connected_vertices[key]), file=f)
-        logging.info('Graph drawn')
+        # for chunk_start in range(0, matrix_len, chunk_size):
+        #     logging.info('Analyzing: %d' % chunk_start)
+        #     similarity_chunk = similarity_by_chunk(
+        #         chunk_start, chunk_start + chunk_size)
+        #     for i in range(0, len(similarity_chunk)):
+        #         arr = np.argsort(similarity_chunk[i])[:6]
+        #         temp = []
+        #         for j in arr:
+        #             temp.append(ngram_dict[j]['ngram'])
+        #         connected_vertices[ngram_dict[i + chunk_start]['ngram']] = temp
+        # logging.info('Drawing graph')
+        # f = open('./data/' + self.dataset + '/graph_mora.txt', 'w')
+        # for key in connected_vertices:
+        #     print(key + '<|>' + '<|>'.join(connected_vertices[key]), file=f)
+        # logging.info('Graph drawn')
 
     def _get_embeddings(self, token):
         if token not in self.word2Idx:
