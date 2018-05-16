@@ -53,3 +53,6 @@ class Graph():
                 x3 = {'token': '<new>', 'tag': None}
             l.append((x1, x2, x3))
         return l
+
+    def build_graph(self):
+        print("Build Graph Method")
