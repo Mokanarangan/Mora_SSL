@@ -73,7 +73,9 @@ def readEmbeddings(embeddingsPath, dataset):
 
     # Extend embeddings file with new tokens
     embeddings = np.array(embeddings)
+    logging.info('Embedding Read')
     dd.io.save('./pkl/' + dataset + '.h5',
                {'embeddings': embeddings, 'word2Idx': word2Idx})
 
+    logging.info('Embedding Saved')
     return embeddings, word2Idx
