@@ -124,6 +124,7 @@ class Classifier():
         for line in f:
             split_list = line.split("<|>")
             node = split_list[0]
+            print(node)
             for ind in range(1, len(split_list)):
                 ngram = split_list[ind]
                 if(node != ngram):
