@@ -4,6 +4,7 @@ from graph import Graph
 import logging
 import numpy as np
 from utils.preprocessing import readEmbeddings, save_obj, load_obj, wordNormalize
+from sklearn.metrics.pairwise import euclidean_distances
 
 
 class Mora(Graph):
@@ -28,7 +29,10 @@ class Mora(Graph):
         ngram_dict = dict()
 
         for i in range(0, len(concat_list)):
+
             ngram = concat_list[i]
+            word_comb = ' '.join([ngram[0]['token'],
+                                  ngram[1]['token'], ngram[2]['token']])
             pointer = ngram[1]
             embedding = None
             for elm in ngram:
@@ -51,10 +55,34 @@ class Mora(Graph):
             if train:
                 x_train.append(embedding)
                 y_train.append(tag_dict[tag])
-            ngram_dict[i] = ngram
+            ngram_dict[i] = {'ngram': word_comb}
             embedding_list.append(embedding)
 
-        matrix_len = embedding_list[0].shape[0]
+        matrix_len = len(embedding_list)
+        chunk_size = 500
+
+        def similarity_by_chunk(start, end):
+            if end > matrix_len:
+                end = matrix_len
+            return euclidean_distances(X=embedding[start:end], Y=embedding)
+
+        connected_vertices = dict()
+        for chunk_start in range(0, matrix_len, chunk_size):
+            logging.info('Analyzing: %d' % chunk_start)
+            similarity_chunk = similarity_by_chunk(
+                chunk_start, chunk_start + chunk_size)
+            for i in range(0, len(similarity_chunk)):
+                arr = np.argsort(similarity_chunk[i])[:6]
+                temp = []
+                for j in arr:
+                    temp.append(ngram_dict[j]['ngram'])
+                connected_vertices[ngram_dict[i + chunk_start]['ngram']] = temp
+        logging.info('Drawing graph')
+        f = open('./data/' + self.dataset + '/graph_mora.txt', 'w')
+        for key in connected_vertices:
+            print(key + '<|>' + '<|>'.join(connected_vertices[key]), file=f)
+        logging.info('Graph drawn')
+
         print(matrix_len)
 
     def _get_embeddings(self, token):
