@@ -54,7 +54,7 @@ class Mora(Graph):
             ngram_dict[i] = ngram
             embedding_list.append(embedding)
 
-        matrix_len = embedding_list[0].shape
+        matrix_len = embedding_list[0].shape[0]
         print(matrix_len)
 
     def _get_embeddings(self, token):
