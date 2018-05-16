@@ -19,6 +19,7 @@ class Mora(Graph):
             for elm in ngram:
                 token = elm['token']
                 tag = elm['tag']
+                print(token, tag)
                 self._get_embeddings(token)
 
     def _get_embeddings(self, token):
