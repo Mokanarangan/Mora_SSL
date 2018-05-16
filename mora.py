@@ -5,6 +5,7 @@ import logging
 import numpy as np
 from utils.preprocessing import readEmbeddings, save_obj, load_obj, wordNormalize
 from sklearn.metrics.pairwise import euclidean_distances
+from scipy.spatial.distance import cdist
 
 
 class Mora(Graph):
@@ -64,7 +65,8 @@ class Mora(Graph):
         def similarity_by_chunk(start, end):
             if end > matrix_len:
                 end = matrix_len
-            return euclidean_distances(X=embedding_list[start:end], Y=embedding_list)
+            # return euclidean_distances(X=embedding_list[start:end], Y=embedding_list)
+            return cdist(X=embedding_list[start:end], Y=embedding_list, 'euclidean')
 
         connected_vertices = dict()
         for chunk_start in range(0, matrix_len, chunk_size):
