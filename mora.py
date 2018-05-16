@@ -24,5 +24,6 @@ class Mora(Graph):
 
     def _get_embeddings(self, token):
         if token not in self.word2Idx:
+            print(token)
             token = 'UNKNOWN_TOKEN'
         return self.embeddings[self.word2Idx[token]]
