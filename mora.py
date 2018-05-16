@@ -13,4 +13,4 @@ class Mora(Graph):
 
     def build_graph(self):
         logging.info('Initiating build vector graph..')
-        print(self.train[20031])
+        print(self.train[20032])
