@@ -11,6 +11,8 @@ class Mora(Graph):
         super().__init__(dataset)
         self.embeddings, self.word2Idx = readEmbeddings(embedding_file)
 
-    def build_graph(self):
+    def build_graph(self, window=3):
         logging.info('Initiating build vector graph..')
-        print(self.train[20032])
+        final = self.train + self.test + self.un_labeled
+        concat_list = self.find_ngrams(final, window)
+        print(concat_list[0])
