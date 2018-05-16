@@ -19,7 +19,6 @@ class Mora(Graph):
             for elm in ngram:
                 token = elm['token']
                 tag = elm['tag']
-                print(type(self._get_embeddings(token)))
 
     def _get_embeddings(self, token):
         if token not in self.word2Idx:
