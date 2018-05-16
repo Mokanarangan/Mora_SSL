@@ -15,6 +15,11 @@ class Mora(Graph):
         logging.info('Initiating build vector graph..')
         final = self.train + self.test + self.un_labeled
         concat_list = self.find_ngrams(final, window)
-        print(self.embeddings[self.word2Idx[concat_list[0][0]['token']]])
-        # for i in range(0, len(concat_list)):
-        # n_gram = concat_list[i]
+        for ngram in concat_list:
+            for elm in ngram:
+                token = elm['token']
+                tag = elm['tag']
+                self._get_embeddings(token)
+
+    def _get_embeddings(self, token):
+        return self.embeddings[self.word2Idx[token]]
