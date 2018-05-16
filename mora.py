@@ -9,7 +9,8 @@ class Mora(Graph):
 
     def __init__(self, dataset, embedding_file):
         super().__init__(dataset)
-        self.embeddings, self.word2Idx = readEmbeddings(embedding_file)
+        self.embeddings, self.word2Idx = readEmbeddings(
+            embedding_file, dataset)
 
     def build_graph(self, window=3):
         logging.info('Initiating build vector graph..')

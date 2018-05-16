@@ -2,6 +2,7 @@ import re
 import numpy as np
 import logging
 import gzip
+import deepdish as dd
 
 
 def wordNormalize(word):
@@ -15,7 +16,7 @@ def wordNormalize(word):
     return word
 
 
-def readEmbeddings(embeddingsPath):
+def readEmbeddings(embeddingsPath, dataset):
     """
     Reads the embeddingsPath.
     :param embeddingsPath: File path to pretrained embeddings
@@ -66,5 +67,7 @@ def readEmbeddings(embeddingsPath):
 
     # Extend embeddings file with new tokens
     embeddings = np.array(embeddings)
+    dd.io.save('./pkl/' + dataset + '.h5',
+               {'embeddings': embeddings, 'word2Idx': word2Idx})
 
     return embeddings, word2Idx
