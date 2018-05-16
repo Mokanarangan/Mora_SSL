@@ -8,7 +8,7 @@ import numpy as np
 
 class Classifier():
 
-    def __init__(self, dataset, BIO):
+    def __init__(self, dataset, BIO, graph_name='graph.txt'):
         """Initiate
         Arguments:
             train {string} -- train data path
@@ -18,7 +18,8 @@ class Classifier():
         print('Processing the classifier')
         self.dataset = dataset
         self.BIO = BIO
-        self.graph = self._process_graph('./data/' + dataset + '/graph.txt')
+        self.graph = self._process_graph(
+            './data/' + dataset + '/' + graph_name)
         self.train = self._process_info(
             './data/' + dataset + '/train.txt', False, True)
         self.test = self._process_info(
