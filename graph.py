@@ -33,7 +33,7 @@ class Graph():
             split = line.split()
             tag = None
             if line in ['\n', '\r\n']:
-                data.append({'token': '<new>', 'tag': tag})
+                data.append({'token': '</s>', 'tag': tag})
                 continue
             if len(split) > 1:
                 tag = split[1]
@@ -46,12 +46,12 @@ class Graph():
             if(ind > 0):
                 x1 = input_list[ind - 1]
             else:
-                x1 = {'token': '<new>', 'tag': None}
+                x1 = {'token': '</s>', 'tag': None}
             x2 = input_list[ind]
             if(ind < len(input_list) - 1):
                 x3 = input_list[ind + 1]
             else:
-                x3 = {'token': '<new>', 'tag': None}
+                x3 = {'token': '</s>', 'tag': None}
             l.append((x1, x2, x3))
         return l
 

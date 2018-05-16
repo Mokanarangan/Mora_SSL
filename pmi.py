@@ -31,12 +31,12 @@ class PMI(Graph):
             word_comb = ' '.join([n_gram[0]['token'],
                                   n_gram[1]['token'], n_gram[2]['token']])
             if(i == 0):
-                x1 = '<new>'
+                x1 = '</s>'
             else:
                 x1 = concat_list[i - 1][0]['token']
 
             if(i >= len(concat_list) - 1):
-                x5 = '<new>'
+                x5 = '</s>'
             else:
                 x5 = concat_list[i + 1][2]['token']
             x2 = n_gram[0]['token']
