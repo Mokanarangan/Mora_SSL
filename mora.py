@@ -60,7 +60,7 @@ class Mora(Graph):
             embedding_list.append(embedding)
 
         matrix_len = len(embedding_list)
-        chunk_size = 500
+        chunk_size = 100
 
         def similarity_by_chunk(start, end):
             if end > matrix_len:
