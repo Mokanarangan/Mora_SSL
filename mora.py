@@ -64,8 +64,7 @@ class Mora(Graph):
         def similarity_by_chunk(start, end):
             if end > matrix_len:
                 end = matrix_len
-            print(embedding[start:end])
-            # return euclidean_distances(X=embedding[start:end], Y=embedding)
+            return euclidean_distances(X=embedding_list[start:end], Y=embedding_list)
 
         connected_vertices = dict()
         for chunk_start in range(0, matrix_len, chunk_size):
