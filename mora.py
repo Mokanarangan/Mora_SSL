@@ -66,7 +66,7 @@ class Mora(Graph):
             if end > matrix_len:
                 end = matrix_len
             # return euclidean_distances(X=embedding_list[start:end], Y=embedding_list)
-            return cdist(X=embedding_list[start:end], Y=embedding_list, 'euclidean')
+            return cdist(embedding_list[start:end], embedding_list, 'euclidean')
 
         connected_vertices = dict()
         for chunk_start in range(0, matrix_len, chunk_size):
