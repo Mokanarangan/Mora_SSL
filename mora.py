@@ -3,7 +3,7 @@
 from graph import Graph
 import logging
 import numpy as np
-from utils.preprocessing import readEmbeddings, save_obj, load_obj
+from utils.preprocessing import readEmbeddings, save_obj, load_obj, wordNormalize
 
 
 class Mora(Graph):
@@ -54,8 +54,10 @@ class Mora(Graph):
             ngram_dict[i] = ngram
             embedding_list.append(embedding)
 
+        matrix_len = embedding_list[0].shape
+        print(matrix_len)
+
     def _get_embeddings(self, token):
         if token not in self.word2Idx:
-            print(token)
             token = 'UNKNOWN_TOKEN'
         return self.embeddings[self.word2Idx[token]]
