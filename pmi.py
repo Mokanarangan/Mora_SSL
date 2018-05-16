@@ -4,6 +4,7 @@ import numpy as np
 import os.path
 from scipy.sparse import lil_matrix
 import pickle
+import logging
 from sklearn.neighbors import NearestNeighbors
 from sklearn.metrics.pairwise import cosine_distances
 from graph import Graph
@@ -16,14 +17,14 @@ class PMI(Graph):
     def build_graph(self, window=3):
         """build the PMI graph
         """
-        print('Extracting n-grams ...')
+        logging.info('Extracting n-grams ...')
         n_gram_total = dict()
         total_count = defaultdict(lambda: 0)
 
         final = self.train + self.test + self.un_labeled
         concat_list = self.find_ngrams(final, window)
         count = 0
-        print('Extracting features')
+        logging.info('Extracting features')
 
         for i in range(0, len(concat_list)):
             n_gram = concat_list[i]
@@ -70,8 +71,8 @@ class PMI(Graph):
             n_gram_total[word_comb][left_context_right] += 1
             total_count[left_context_right] += 1
 
-        print('Features extracted')
-        print('Calculating PMI values..')
+        logging.info('Features extracted')
+        logging.info('Calculating PMI values..')
 
         unique_graph = dict()
         final_list = []
@@ -99,7 +100,7 @@ class PMI(Graph):
                 pmi_val = math.log((unique_graph[key][key2] / total) /
                                    ((total_count[key] / total) * (total_count[key2] / total)), 2)
                 spr_matrix[i, feat_count[key2]] = pmi_val + 1
-        print('PMI values calculated')
+        logging.info('PMI values calculated')
         chunk_size = 500
 
         matrix_len = spr_matrix.shape[0]  # Not sparse numpy.ndarray
@@ -112,7 +113,7 @@ class PMI(Graph):
         connected_vertices = dict()
 
         for chunk_start in range(0, matrix_len, chunk_size):
-            print('Analyzing: %d' % chunk_start)
+            logging.info('Analyzing: %d' % chunk_start)
             cosine_similarity_chunk = similarity_cosine_by_chunk(
                 chunk_start, chunk_start + chunk_size)
             for i in range(0, len(cosine_similarity_chunk)):
@@ -121,12 +122,12 @@ class PMI(Graph):
                 for j in arr:
                     temp.append(final_list[j]['ngram'])
                 connected_vertices[final_list[i + chunk_start]['ngram']] = temp
-        print('Drawing graph')
+        logging.info('Drawing graph')
         f = open('./data/' + self.dataset + '/graph.txt', 'w')
         for key in connected_vertices:
             print(key + '<|>' + '<|>'.join(connected_vertices[key]), file=f)
-        print('Graph drawn')
-        print('Total ngram count: %d' % count)
-        print('Total uique ngram count: %d' % len(unique_graph.keys()))
-        print('Total feat count: %d' % len(feat_count.keys()))
+        logging.info('Graph drawn')
+        logging.info('Total ngram count: %d' % count)
+        logging.info('Total uique ngram count: %d' % len(unique_graph.keys()))
+        logging.info('Total feat count: %d' % len(feat_count.keys()))
         return connected_vertices

@@ -1,5 +1,6 @@
 """Abstract class graph
 """
+import logging
 
 
 class Graph():
@@ -15,9 +16,9 @@ class Graph():
         self.un_labeled = self._process_info(
             './data/' + dataset + '/un_labeled.txt')
         self.test = self._process_info('./data/' + dataset + '/test.txt')
-        print('Number of Train lines: %d' % len(self.train))
-        print('Number of Test lines: %d' % len(self.test))
-        print('Number of Unlabeled lines: %d' % len(self.un_labeled))
+        logging.info('Number of Train lines: %d' % len(self.train))
+        logging.info('Number of Test lines: %d' % len(self.test))
+        logging.info('Number of Unlabeled lines: %d' % len(self.un_labeled))
 
     def _process_info(self, file_name):
         """Process data and stores in variable.
@@ -55,4 +56,4 @@ class Graph():
         return l
 
     def build_graph(self):
-        print("Build Graph Method")
+        logging.info("Build Graph Method")
