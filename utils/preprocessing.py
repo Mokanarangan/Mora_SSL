@@ -30,10 +30,6 @@ def readEmbeddings(embeddingsPath, dataset):
     logging.info("Read file: %s" % embeddingsPath)
     word2Idx = {}
     embeddings = []
-    if os.path.exists('./pkl/' + dataset + '.h5'):
-        logging.info('Loading from existing file')
-        tmp = dd.io.load('./pkl/' + dataset + '.h5')
-        return tmp['embeddings'], tmp['word2Idx']
     logging.info("Generate new embeddings files for a dataset")
 
     embeddingsIn = gzip.open(embeddingsPath, "rt") if embeddingsPath.endswith('.gz') else open(embeddingsPath,
@@ -74,7 +70,6 @@ def readEmbeddings(embeddingsPath, dataset):
     # Extend embeddings file with new tokens
     embeddings = np.array(embeddings)
     logging.info('Embedding Read')
-    save_obj({'embeddings': embeddings, 'word2Idx': word2Idx}, dataset)
 
     logging.info('Embedding Saved')
     return embeddings, word2Idx

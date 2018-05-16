@@ -2,7 +2,7 @@
 """
 from graph import Graph
 import logging
-from utils.preprocessing import readEmbeddings
+from utils.preprocessing import readEmbeddings, save_obj, load_obj
 
 
 class Mora(Graph):
