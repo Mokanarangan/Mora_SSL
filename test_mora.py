@@ -1,6 +1,18 @@
 import argparse
 from mora import Mora
 from classify import Classifier
+import logging
+
+# :: Logging level ::
+loggingLevel = logging.INFO
+logger = logging.getLogger()
+logger.setLevel(loggingLevel)
+
+ch = logging.StreamHandler(sys.stdout)
+ch.setLevel(loggingLevel)
+formatter = logging.Formatter('%(message)s')
+ch.setFormatter(formatter)
+logger.addHandler(ch)
 
 parser = argparse.ArgumentParser()
 
