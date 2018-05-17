@@ -45,6 +45,8 @@ class Classifier():
             tag = total[ind]['tag']
             if(tag != None and tag in string.punctuation):
                 tag = 'O'
+            if(x2 == '</s>'):
+                continue
             test = total[ind]['test']
             train = total[ind]['train']
             x3 = total[ind + 1]['token']
@@ -93,6 +95,8 @@ class Classifier():
                     index = index_arr[ind]
                     tag = ngram_dict[node]['tag']
                     if(train_arr[ind]):
+                        if(tag == None):
+                            count += 1
                         x_train.append(index)
                         y_train.append(ngram_dict[node]['tag'])
                     elif(test_arr[ind]):
@@ -100,6 +104,7 @@ class Classifier():
                         y_test.append(ngram_dict[node]['tag'])
                     for connected in self.graph[node]:
                         Graph[index, ngram_dict[connected]['index']] = 1
+        print(count)
         print(len(x_train), len(x_test))
         print('Classifying')
         clf = HMN(graph=Graph, max_iter=1000)
@@ -155,8 +160,6 @@ class Classifier():
                     tag = split[1].split('-')[1]
                 else:
                     tag = split[1]
-            if(train and tag == None):
-                print(line)
             data.append(
                 {'token': split[0].replace('\n', ''), 'tag': tag, 'test': test, 'train': train})
         return data
