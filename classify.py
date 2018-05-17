@@ -88,7 +88,7 @@ class Classifier():
                     Graph[n_gram_dict[ngram], node_ind] = 1
         clf = HMN(graph=Graph, max_iter=1000)
         clf.fit(np.array(X_train), np.array(Y_train))
-        y_predict = clf.predict(X_test)
+        y_predict = clf.predict(np.array(X_test))
         print(y_predict, file=fl)
 
     def _process_info(self, file_name, test=False, train=False):
