@@ -43,7 +43,7 @@ class Classifier():
             x1 = total[ind - 1]['token']
             x2 = total[ind]['token']
             tag = total[ind]['tag']
-            if(tag in string.punctuation):
+            if(tag != None and tag in string.punctuation):
                 tag = 'O'
             test = total[ind]['test']
             train = total[ind]['train']
