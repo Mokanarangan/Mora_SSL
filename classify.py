@@ -7,6 +7,8 @@ import numpy as np
 import string
 from utils.preprocessing import find_ngrams
 
+end_tag = '<new>'
+
 
 class Classifier():
 
@@ -53,7 +55,7 @@ class Classifier():
             token = ngram[1]['token']
             train = ngram[1]['train']
             test = ngram[1]['test']
-            if(token == '</s>'):
+            if(token == end_tag):
                 continue
             if(tag != None and tag in string.punctuation):
                 tag = 'O'
@@ -103,7 +105,7 @@ class Classifier():
             split = line.split()
             tag = None
             if line in ['\n', '\r\n']:
-                data.append({'token': '</s>', 'tag': tag,
+                data.append({'token': end_tag, 'tag': tag,
                              'test': test, 'train': train})
                 continue
             if len(split) > 1:
