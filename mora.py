@@ -80,9 +80,11 @@ class Mora(Graph):
                 arr = np.argsort(similarity_chunk[i])[:6]
                 temp = []
                 for j in arr:
-                    if(j in ngram_dict):
+                    if j in ngram_dict:
                         temp.append(ngram_dict[j]['ngram'])
-                connected_vertices[ngram_dict[i + chunk_start]['ngram']] = temp
+                if (i + chunk_start) in ngram_dict:
+                    connected_vertices[ngram_dict[i +
+                                                  chunk_start]['ngram']] = temp
         logging.info('Drawing graph')
         f = open('./data/' + self.dataset + '/graph_mora.txt', 'w')
         for key in connected_vertices:
