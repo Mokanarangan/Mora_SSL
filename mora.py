@@ -46,7 +46,8 @@ class Mora(Graph):
                 if embedding is None:
                     embedding = self._get_embeddings(token)
                 else:
-                    embedding = np.add(embedding, self._get_embeddings(token))
+                    embedding = np.concatenate(
+                        embedding, self._get_embeddings(token))
             embedding = np.divide(embedding, 3)
             tag = pointer['tag']
 
