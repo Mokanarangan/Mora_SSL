@@ -34,7 +34,10 @@ class Classifier():
         total = self.train + self.test + self.un_labeled
         ngrams = find_ngrams(total)
         fl = open('tt.txt', 'w')
-        for ngram in ngrams:
+        tag_dict = dict()
+        tag_count = 0
+        for index in len(0, len(ngrams)):
+            ngram = ngrams[index]
             word_comb = ''
             for elm in ngram:
                 word_comb = word_comb + ' ' + elm['token']
@@ -47,7 +50,10 @@ class Classifier():
             if(tag != None and tag in string.punctuation):
                 tag = 'O'
             if(train):
-                print(word_comb, tag, file=fl)
+                if(tag not in tag_dict):
+                    tag_dict[tag] = tag_count
+                    tag_count += 1
+                    print(tag_count)
 
     def _process_graph(self, file_name):
         """Process the created in the graph file
