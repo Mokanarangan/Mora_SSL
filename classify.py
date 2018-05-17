@@ -55,7 +55,6 @@ class Classifier():
                 continue
             if(tag != None and tag in string.punctuation):
                 tag = 'O'
-            total_size += 1
             if(train or test):
                 if(tag not in tag_dict):
                     tag_dict[tag] = tag_count
@@ -64,8 +63,8 @@ class Classifier():
                     X_train.append(tag_dict[tag])
                 elif(test):
                     X_test.append(tag_dict[tag])
-            n_gram_dict[word_comb] = index
-            print(word_comb, file=fl)
+            n_gram_dict[word_comb] = total_size
+            total_size += 1
         self._process_graph(self.graph_name, total_size, n_gram_dict)
 
     def _process_graph(self, file_name, total_size, n_gram_dict):
