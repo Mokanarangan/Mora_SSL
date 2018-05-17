@@ -28,6 +28,8 @@ class PMI(Graph):
 
         for i in range(0, len(concat_list)):
             n_gram = concat_list[i]
+            if(n_gram[1]['token'] == '</s>'):
+                continue
             word_comb = ' '.join([n_gram[0]['token'],
                                   n_gram[1]['token'], n_gram[2]['token']])
             if(i == 0):
