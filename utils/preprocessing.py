@@ -83,3 +83,13 @@ def save_obj(obj, name):
 def load_obj(name):
     with open('pkl/' + name + '.pkl', 'rb') as f:
         return pickle.load(f)
+
+
+def find_ngrams(input_list):
+    l = []
+    for ind in range(1, len(input_list) - 1):
+        x1 = input_list[ind - 1]
+        x2 = input_list[ind]
+        x3 = input_list[ind + 1]
+        l.append((x1, x2, x3))
+    return l
