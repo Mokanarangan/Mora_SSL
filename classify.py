@@ -68,9 +68,10 @@ class Classifier():
                     X_test.append(tag_dict[tag])
             n_gram_dict[word_comb] = total_size
             total_size += 1
-        self._process_graph(self.graph_name, total_size, n_gram_dict, X_train)
+        self._process_graph(self.graph_name, total_size,
+                            n_gram_dict, X_train, Y_train)
 
-    def _process_graph(self, file_name, total_size, n_gram_dict, X_train):
+    def _process_graph(self, file_name, total_size, n_gram_dict, X_train, Y_train):
         """Process the created in the graph file
         """
         fl = open('tt.txt', 'w')
@@ -85,6 +86,7 @@ class Classifier():
                 if(node != ngram):
                     Graph[node_ind, n_gram_dict[ngram]] = 1
                     Graph[n_gram_dict[ngram], node_ind] = 1
+        print(X_train, Y_train)
         clf = HMN(graph=Graph, max_iter=1000)
 
     def _process_info(self, file_name, test=False, train=False):
