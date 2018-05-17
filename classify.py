@@ -44,7 +44,7 @@ class Classifier():
             ngram = ngrams[index]
             word_comb = None
             for elm in ngram:
-                if(word_comb == None)
+                if(word_comb == None):
                     word_comb = elm['token']
                 else:
                     word_comb = word_comb + ' ' + elm['token']
