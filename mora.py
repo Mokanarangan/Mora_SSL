@@ -17,7 +17,8 @@ class Mora(Graph):
 
     def build_graph(self, window=3):
         logging.info('Initiating build vector graph..')
-        final = self.train + self.test + self.un_labeled
+        # final = self.train + self.test + self.un_labeled
+        final = self.train + self.test
         concat_list = self.find_ngrams(final, window)
         tag_dict = dict()
         tag_inv_dict = dict()
