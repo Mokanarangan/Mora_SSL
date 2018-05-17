@@ -119,7 +119,7 @@ class PMI(Graph):
             cosine_similarity_chunk = similarity_cosine_by_chunk(
                 chunk_start, chunk_start + chunk_size)
             for i in range(0, len(cosine_similarity_chunk)):
-                arr = np.argsort(cosine_similarity_chunk[i])[:6]
+                arr = np.argsort(cosine_similarity_chunk[i])[:20]
                 temp = []
                 for j in arr:
                     temp.append(final_list[j]['ngram'])
