@@ -66,7 +66,7 @@ class Classifier():
     def _process_graph(self, file_name):
         """Process the created in the graph file
         """
-        f = open('./data' + self.dataset + '/' + file_name)
+        f = open('./data/' + self.dataset + '/' + file_name)
         graph_dict = defaultdict(lambda: [])
         for line in f:
             split_list = line.split("<|>")
