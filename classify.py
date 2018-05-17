@@ -99,8 +99,6 @@ class Classifier():
                 for ind in range(0, len(index_arr)):
                     index = index_arr[ind]
                     if(train_arr[ind]):
-                        if(tag_arr[ind] == None):
-                            count += 1
                         x_train.append(index)
                         y_train.append(tag_arr[ind])
                     elif(test_arr[ind]):
@@ -112,7 +110,7 @@ class Classifier():
         print(len(x_train), len(x_test))
         print('Classifying')
         clf = HMN(graph=Graph, max_iter=1000)
-        clf.fit(np.array(x_train), np.array(y_train))
+        clf.fit(x_train, y_train)
         y_predict = clf.predict(np.array(x_test))
         print('Predicting')
         x_test.sort()
