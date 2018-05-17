@@ -40,11 +40,14 @@ class Classifier():
                 word_comb = word_comb + ' ' + elm['token']
             tag = ngram[1]['tag']
             token = ngram[1]['token']
+            train = ngram[1]['train']
+            test = ngram[1]['test']
             if(token == '</s>'):
                 continue
             if(tag != None and tag in string.punctuation):
                 tag = 'O'
-            print(word_comb, tag, file=fl)
+            if(train):
+                print(word_comb, tag, file=fl)
 
     def _process_graph(self, file_name):
         """Process the created in the graph file
