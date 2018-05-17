@@ -55,6 +55,10 @@ class Classifier():
                 tag_dict[tag] = tag_count
                 tag_inv_dict[tag_count] = tag
                 tag_count += 1
+            tag_val = None
+            if(tag != None):
+                tag_val = tag_dict[tag]
+
             setup = {'ngram': ngram,
                      'token': x2}
             if(ngram in ngram_dict):
@@ -65,10 +69,7 @@ class Classifier():
                 arr.append(ind)
                 test_arr.append(test)
                 train_arr.append(train)
-                if(tag != None):
-                    tag_arr.append(tag_dict[tag])
-                else:
-                    tag_arr.append(None)
+                tag_arr.append(tag_val)
 
                 setup['index'] = arr
                 setup['test'] = test_arr
@@ -78,7 +79,7 @@ class Classifier():
                 setup['index'] = [ind]
                 setup['test'] = [test]
                 setup['train'] = [train]
-                setup['tag'] = [tag_dict[tag]]
+                setup['tag'] = [tag_val]
             ngram_dict[ngram] = setup
             ngram_index_dict[ind] = {'tag': tag, 'token': x2}
         x_train = []
