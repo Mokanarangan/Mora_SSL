@@ -36,7 +36,7 @@ class Classifier():
         fl = open('tt.txt', 'w')
         tag_dict = dict()
         tag_count = 0
-        for index in len(0, len(ngrams)):
+        for index in range(0, len(ngrams)):
             ngram = ngrams[index]
             word_comb = ''
             for elm in ngram:
