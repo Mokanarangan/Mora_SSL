@@ -80,6 +80,7 @@ class Classifier():
         x_test = []
         y_test = []
         print('Fitting graph')
+        count = 0
         for node in self.graph:
             if(node in ngram_dict):
                 index_arr = ngram_dict[node]['index']
@@ -93,7 +94,7 @@ class Classifier():
                     tag = ngram_dict[node]['tag']
                     if(train_arr[ind]):
                         if(tag == None):
-                            print(node)
+                            count += 1
                         x_train.append(index)
                         y_train.append(ngram_dict[node]['tag'])
                     elif(test_arr[ind]):
@@ -101,6 +102,7 @@ class Classifier():
                         y_test.append(ngram_dict[node]['tag'])
                     for connected in self.graph[node]:
                         Graph[index, ngram_dict[connected]['index']] = 1
+        print(count)
         print(len(x_train), len(x_test))
         print('Classifying')
         clf = HMN(graph=Graph, max_iter=1000)
