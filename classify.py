@@ -85,7 +85,7 @@ class Classifier():
             node_ind = n_gram_dict[node]
             for ind in range(1, len(split_list)):
                 ngram = split_list[ind].replace('\n', '')
-                if(node != ngram):
+                if(node != ngram and ngram in n_gram_dict):
                     Graph[node_ind, n_gram_dict[ngram]] = 1
         clf = LGC(graph=Graph, max_iter=1000)
         clf.fit(np.array(X_train), np.array(Y_train))
