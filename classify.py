@@ -150,5 +150,5 @@ class Classifier():
                 else:
                     tag = split[1]
             data.append(
-                {'token': split[0], 'tag': tag, 'test': test, 'train': train})
+                {'token': split[0].replace('\n', ''), 'tag': tag, 'test': test, 'train': train})
         return data
