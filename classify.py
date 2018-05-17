@@ -147,7 +147,6 @@ class Classifier():
             split = line.split()
             tag = None
             if line in ['\n', '\r\n']:
-                print(line)
                 data.append({'token': '</s>', 'tag': tag,
                              'test': test, 'train': train})
                 continue
@@ -156,6 +155,8 @@ class Classifier():
                     tag = split[1].split('-')[1]
                 else:
                     tag = split[1]
+            if(train and tag == None):
+                print(line)
             data.append(
                 {'token': split[0].replace('\n', ''), 'tag': tag, 'test': test, 'train': train})
         return data
