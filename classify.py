@@ -31,7 +31,7 @@ class Classifier():
     def classify(self):
         """Classify the data
         """
-        total = self.train + self.test
+        total = self.train + self.test + self.un_labeled
         ngrams = find_ngrams(total)
         fl = open('tt.txt', 'w')
         for ngram in ngrams:
