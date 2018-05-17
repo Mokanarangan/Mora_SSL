@@ -67,6 +67,7 @@ class Base(BaseEstimator, ClassifierMixin):
 
         remaining_iter = self.max_iter
         while remaining_iter > 0:
+            print('her')
             self.F_ = self._propagate()
             remaining_iter -= 1
 
