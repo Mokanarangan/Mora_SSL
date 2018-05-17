@@ -78,7 +78,7 @@ class Classifier():
             node = split_list[0]
             node_ind = n_gram_dict[node]
             for ind in range(1, len(split_list)):
-                ngram = split_list[ind].replace('\n')
+                ngram = split_list[ind].replace('\n', '')
                 if(node != ngram):
                     print(ngram, n_gram_dict[ngram], file=fl)
 
