@@ -99,7 +99,7 @@ class Classifier():
                 for ind in range(0, len(index_arr)):
                     index = index_arr[ind]
                     if(train_arr[ind]):
-                        if(tag == None):
+                        if(tag_arr[ind] == None):
                             count += 1
                         x_train.append(index)
                         y_train.append(tag_arr[ind])
