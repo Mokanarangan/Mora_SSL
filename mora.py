@@ -57,7 +57,6 @@ class Mora(Graph):
                     tag_count += 1
             test = pointer['test']
             train = pointer['train']
-            print(train)
             if train:
                 x_train.append(embedding)
                 y_train.append(tag_dict[tag])

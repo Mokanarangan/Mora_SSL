@@ -12,10 +12,12 @@ class Graph():
             test {string} -- test data path
         """
         self.dataset = dataset
-        self.train = self._process_info('./data/' + dataset + '/train.txt')
+        self.train = self._process_info(
+            './data/' + dataset + '/train.txt', False, True)
         self.un_labeled = self._process_info(
             './data/' + dataset + '/un_labeled.txt')
-        self.test = self._process_info('./data/' + dataset + '/test.txt')
+        self.test = self._process_info(
+            './data/' + dataset + '/test.txt', True, False)
         logging.info('Number of Train lines: %d' % len(self.train))
         logging.info('Number of Test lines: %d' % len(self.test))
         logging.info('Number of Unlabeled lines: %d' % len(self.un_labeled))
