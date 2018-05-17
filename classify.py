@@ -36,6 +36,7 @@ class Classifier():
         fl = open('tt.txt', 'w')
         tag_dict = dict()
         tag_count = 0
+        X_train = []
         for index in range(0, len(ngrams)):
             ngram = ngrams[index]
             word_comb = ''
@@ -53,7 +54,8 @@ class Classifier():
                 if(tag not in tag_dict):
                     tag_dict[tag] = tag_count
                     tag_count += 1
-                    print(tag_count)
+                X_train.append(tag_dict[tag])
+        print(X_train)
 
     def _process_graph(self, file_name):
         """Process the created in the graph file
