@@ -49,8 +49,6 @@ class Classifier():
                 continue
             x3 = total[ind + 1]['token']
             ngram = ' '.join([x1, x2, x3])
-            if('Tom' in ngram):
-                print(ngram)
             if(tag not in tag_dict):
                 tag_dict[tag] = tag_count
                 tag_inv_dict[tag_count] = tag
