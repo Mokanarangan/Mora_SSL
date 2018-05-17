@@ -151,6 +151,8 @@ class Classifier():
                     tag = split[1].split('-')[1]
                 else:
                     tag = split[1]
+            if('explains' in split[0]):
+                print(line)
             data.append(
                 {'token': split[0].replace('\n', ''), 'tag': tag, 'test': test, 'train': train})
         return data
