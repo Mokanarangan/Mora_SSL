@@ -63,6 +63,7 @@ class Mora(Graph):
             ngram_dict[i] = {'ngram': word_comb}
             embedding_list.append(embedding)
         clf = LinearDiscriminantAnalysis()
+        print(x_train)
         clf.fit(np.matrix(x_train), np.array(y_train))
         embedding_list = clf.transform(np.array(embedding_list))
 
