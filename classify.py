@@ -73,15 +73,13 @@ class Classifier():
         fl = open('tt.txt', 'w')
         Graph = lil_matrix((total_size, total_size))
         f = open('./data/' + self.dataset + '/' + file_name)
-        graph_dict = defaultdict(lambda: [])
         for line in f:
             split_list = line.split("<|>")
             node = split_list[0]
             node_ind = n_gram_dict[node]
             for ind in range(1, len(split_list)):
-                ngram = split_list[ind]
+                ngram = split_list[ind].replace('\n')
                 if(node != ngram):
-                    graph_dict[node].append(ngram.replace('\n', ''))
                     print(ngram, n_gram_dict[ngram], file=fl)
 
         return graph_dict
