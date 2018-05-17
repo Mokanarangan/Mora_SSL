@@ -89,7 +89,7 @@ class Classifier():
         clf = HMN(graph=Graph, max_iter=1000)
         clf.fit(np.array(X_train), np.array(Y_train))
         y_predict = clf.predict(X_test)
-        print(y_predict)
+        print(y_predict, file=fl)
 
     def _process_info(self, file_name, test=False, train=False):
         """Process data and stores in variable.
