@@ -15,7 +15,7 @@ from sklearn.base import BaseEstimator, ClassifierMixin
 class Base(BaseEstimator, ClassifierMixin):
     __metaclass__ = ABCMeta
 
-    def __init__(self, graph, max_iter=30):
+    def __init__(self, graph, max_iter=1000):
         self.max_iter = max_iter
         self.graph = graph
 

@@ -86,8 +86,6 @@ class Classifier():
                 if(node != ngram):
                     Graph[node_ind, n_gram_dict[ngram]] = 1
         clf = LGC(graph=Graph, max_iter=1000)
-        print(Graph, file=open('gg.txt', 'w'))
-        print(X_test, file=fl)
         clf.fit(np.array(X_train), np.array(Y_train))
         y_predict = clf.predict(np.array(X_test))
         print(y_predict, file=fl)
