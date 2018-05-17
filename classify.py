@@ -41,6 +41,7 @@ class Classifier():
         X_train = []
         Y_train = []
         X_test = []
+        Y_test = []
         n_gram_dict = dict()
         total_size = 0
         for index in range(0, len(ngrams)):
@@ -68,12 +69,13 @@ class Classifier():
                     Y_train.append(tag_dict[tag])
                 elif(test):
                     X_test.append(total_size)
+                    Y_test.append(total_size)
             n_gram_dict[word_comb] = total_size
             total_size += 1
         self._process_graph(self.graph_name, total_size,
-                            n_gram_dict, X_train, Y_train, X_test)
+                            n_gram_dict, X_train, Y_train, X_test, Y_test)
 
-    def _process_graph(self, file_name, total_size, n_gram_dict, X_train, Y_train, X_test):
+    def _process_graph(self, file_name, total_size, n_gram_dict, X_train, Y_train, X_test, Y_test):
         """Process the created in the graph file
         """
         fl = open('tt.txt', 'w')
@@ -91,8 +93,7 @@ class Classifier():
         print(Graph, file=open('done.txt', 'w'))
         clf.fit(np.array(X_train), np.array(Y_train))
         y_predict = clf.predict(np.array(X_test))
-        for line in y_predict:
-            print(line, file=fl)
+        print(len(y_predict), len(Y_test))
 
     def _process_info(self, file_name, test=False, train=False):
         """Process data and stores in variable.
