@@ -35,6 +35,8 @@ class Mora(Graph):
             word_comb = ' '.join([ngram[0]['token'],
                                   ngram[1]['token'], ngram[2]['token']])
             pointer = ngram[1]
+            if(pointer['token'] == '</s>'):
+                continue
             embedding = None
             for elm in ngram:
                 token = elm['token']
