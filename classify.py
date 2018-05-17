@@ -88,6 +88,7 @@ class Classifier():
         y_test = []
         print('Fitting graph')
         count = 0
+        fl = open('tt.txt')
         for node in self.graph:
             if(node in ngram_dict):
                 index_arr = ngram_dict[node]['index']
@@ -95,13 +96,12 @@ class Classifier():
                 test_arr = ngram_dict[node]['test']
                 tag_arr = ngram_dict[node]['tag']
                 token = ngram_dict[node]['token']
-                print(node)
                 if(token == '</s>'):
                     continue
                 for ind in range(0, len(index_arr)):
                     index = index_arr[ind]
                     if(train_arr[ind]):
-                        print(token, tag_arr[ind])
+                        print(node, token, tag_arr[ind], file=fl)
                         x_train.append(index)
                         y_train.append(tag_arr[ind])
                     elif(test_arr[ind]):
