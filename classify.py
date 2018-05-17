@@ -95,6 +95,7 @@ class Classifier():
                 test_arr = ngram_dict[node]['test']
                 tag_arr = ngram_dict[node]['tag']
                 token = ngram_dict[node]['token']
+                print(node)
                 if(token == '</s>'):
                     continue
                 for ind in range(0, len(index_arr)):
