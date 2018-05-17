@@ -69,7 +69,7 @@ class Classifier():
                     Y_train.append(tag_dict[tag])
                 elif(test):
                     X_test.append(total_size)
-                    Y_test.append(total_size)
+                    Y_test.append(tag_dict[tag])
             n_gram_dict[word_comb] = total_size
             total_size += 1
         self._process_graph(self.graph_name, total_size,
