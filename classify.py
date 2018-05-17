@@ -82,8 +82,6 @@ class Classifier():
                 if(node != ngram):
                     print(ngram, n_gram_dict[ngram], file=fl)
 
-        return graph_dict
-
     def _process_info(self, file_name, test=False, train=False):
         """Process data and stores in variable.
         File should be in 'X X' format
