@@ -92,20 +92,20 @@ class Classifier():
                 index_arr = ngram_dict[node]['index']
                 train_arr = ngram_dict[node]['train']
                 test_arr = ngram_dict[node]['test']
+                tag_arr = ngram_dict[node]['tag']
                 token = ngram_dict[node]['token']
                 if(token == '</s>'):
                     continue
                 for ind in range(0, len(index_arr)):
                     index = index_arr[ind]
-                    tag = ngram_dict[node]['tag']
                     if(train_arr[ind]):
                         if(tag == None):
                             count += 1
                         x_train.append(index)
-                        y_train.append(ngram_dict[node]['tag'])
+                        y_train.append(tag_arr[ind])
                     elif(test_arr[ind]):
                         x_test.append(index)
-                        y_test.append(ngram_dict[node]['tag'])
+                        y_test.append(tag_arr[ind])
                     for connected in self.graph[node]:
                         Graph[index, ngram_dict[connected]['index']] = 1
         print(count)
