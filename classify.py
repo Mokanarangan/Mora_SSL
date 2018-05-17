@@ -42,6 +42,8 @@ class Classifier():
             token = ngram[1]['token']
             if(token == '</s>'):
                 continue
+            if(tag != None and tag in string.punctuation):
+                tag = 'O'
             print(word_comb, tag, file=fl)
 
     def _process_graph(self, file_name):
