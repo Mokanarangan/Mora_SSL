@@ -85,7 +85,6 @@ class Classifier():
                 ngram = split_list[ind].replace('\n', '')
                 if(node != ngram):
                     Graph[node_ind, n_gram_dict[ngram]] = 1
-                    Graph[n_gram_dict[ngram], node_ind] = 1
         clf = LGC(graph=Graph, max_iter=1000)
         print(Graph, file=open('gg.txt', 'w'))
         print(X_test, file=fl)
