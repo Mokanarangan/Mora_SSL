@@ -91,7 +91,8 @@ class Classifier():
         print(Graph, file=open('done.txt', 'w'))
         clf.fit(np.array(X_train), np.array(Y_train))
         y_predict = clf.predict(np.array(X_test))
-        print(y_predict, file=fl)
+        for line in y_predict:
+            print(line, file=fl)
 
     def _process_info(self, file_name, test=False, train=False):
         """Process data and stores in variable.
