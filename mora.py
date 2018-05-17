@@ -5,6 +5,7 @@ import logging
 import numpy as np
 from utils.preprocessing import readEmbeddings, save_obj, load_obj, wordNormalize
 from sklearn.metrics.pairwise import euclidean_distances
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from scipy.spatial.distance import cdist
 
 
@@ -61,6 +62,9 @@ class Mora(Graph):
                 y_train.append(tag_dict[tag])
             ngram_dict[i] = {'ngram': word_comb}
             embedding_list.append(embedding)
+        clf = LinearDiscriminantAnalysis()
+        clf.fit(np.array(x_train), np.array(y_train))
+        embedding_list = clf.transform(np.array(embedding_list))
 
         matrix_len = len(embedding_list)
         chunk_size = 100
@@ -78,7 +82,7 @@ class Mora(Graph):
                 chunk_start, chunk_start + chunk_size)
             logging.info('Sorting: %d' % chunk_start)
             for i in range(0, len(similarity_chunk)):
-                arr = np.argsort(similarity_chunk[i])[:6]
+                arr = np.argsort(similarity_chunk[i])[:50]
                 temp = []
                 for j in arr:
                     if j in ngram_dict:
