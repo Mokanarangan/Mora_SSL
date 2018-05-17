@@ -38,7 +38,8 @@ class Classifier():
             word_comb = ''
             for elm in ngram:
                 word_comb = word_comb + ' ' + elm['token']
-            print(ngram, file=fl)
+            tag = ngram['tag']
+            print(word_comb, tag, file=fl)
 
     def _process_graph(self, file_name):
         """Process the created in the graph file
