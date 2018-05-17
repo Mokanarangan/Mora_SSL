@@ -43,13 +43,13 @@ class Classifier():
             x1 = total[ind - 1]['token']
             x2 = total[ind]['token']
             tag = total[ind]['tag']
+            if(tag in string.punctuation):
+                tag = 'O'
             test = total[ind]['test']
             train = total[ind]['train']
-            if(tag == None or tag in string.punctuation):
-                continue
             x3 = total[ind + 1]['token']
             ngram = ' '.join([x1, x2, x3])
-            if(tag not in tag_dict):
+            if(tag not in tag_dict and tag != None):
                 tag_dict[tag] = tag_count
                 tag_inv_dict[tag_count] = tag
                 tag_count += 1
@@ -149,8 +149,6 @@ class Classifier():
                     tag = split[1].split('-')[1]
                 else:
                     tag = split[1]
-            if('explains' in split[0]):
-                print(split[0])
             data.append(
                 {'token': split[0].replace('\n', ''), 'tag': tag, 'test': test, 'train': train})
         return data
