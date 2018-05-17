@@ -75,12 +75,11 @@ class Classifier():
         for line in f:
             split_list=line.split("<|>")
             node=split_list[0]
+            node_ind=n_gram_dict[node]
             for ind in range(1, len(split_list)):
                 ngram=split_list[ind]
                 if(node != ngram):
                     graph_dict[node].append(ngram.replace('\n', ''))
-            if node not in n_gram_dict:
-                print(node)
 
         return graph_dict
 
