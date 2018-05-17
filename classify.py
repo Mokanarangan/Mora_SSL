@@ -84,6 +84,7 @@ class Classifier():
                 ngram = split_list[ind]
                 if(node != ngram):
                     graph_dict[node].append(ngram.replace('\n', ''))
+                    print(ngram, n_gram_dict[ngram])
 
         return graph_dict
 
