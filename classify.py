@@ -86,7 +86,7 @@ class Classifier():
                 if(node != ngram):
                     Graph[node_ind, n_gram_dict[ngram]] = 1
                     Graph[n_gram_dict[ngram], node_ind] = 1
-        print(X_train, Y_train)
+        print(X_train)
         clf = HMN(graph=Graph, max_iter=1000)
 
     def _process_info(self, file_name, test=False, train=False):
