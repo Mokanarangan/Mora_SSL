@@ -78,7 +78,7 @@ class Classifier():
                 setup['index'] = [ind]
                 setup['test'] = [test]
                 setup['train'] = [train]
-                setup['tag'] = tag
+                setup['tag'] = [tag]
             ngram_dict[ngram] = setup
             ngram_index_dict[ind] = {'tag': tag, 'token': x2}
         x_train = []
