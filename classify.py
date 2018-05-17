@@ -87,7 +87,8 @@ class Classifier():
                     Graph[node_ind, n_gram_dict[ngram]] = 1
                     Graph[n_gram_dict[ngram], node_ind] = 1
         clf = LGC(graph=Graph, max_iter=1000)
-        print(Graph)
+        print(Y_train)
+
         clf.fit(np.array(X_train), np.array(Y_train))
         y_predict = clf.predict(np.array(X_test))
         print(y_predict, file=fl)
