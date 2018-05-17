@@ -61,7 +61,7 @@ class Classifier():
                 elif(test):
                     X_test.append(tag_dict[tag])
             n_gram_dict[word_comb] = index
-        print(n_gram_dict)
+        self._process_graph(self.graph_name)
 
     def _process_graph(self, file_name):
         """Process the created in the graph file
@@ -71,10 +71,12 @@ class Classifier():
         for line in f:
             split_list = line.split("<|>")
             node = split_list[0]
-            for ind in range(2, len(split_list)):
+            for ind in range(1, len(split_list)):
                 ngram = split_list[ind]
                 if(node != ngram):
                     graph_dict[node].append(ngram.replace('\n', ''))
+                else:
+                    print('here')
 
         return graph_dict
 
