@@ -33,7 +33,6 @@ class Classifier():
         """
         total = self.train + self.test + self.un_labeled
         ngrams = find_ngrams(total)
-        fl = open('tt.txt', 'w')
         tag_dict = dict()
         tag_count = 0
         X_train = []
@@ -72,7 +71,7 @@ class Classifier():
     def _process_graph(self, file_name, total_size, n_gram_dict):
         """Process the created in the graph file
         """
-        print(total_size)
+        fl = open('tt.txt', 'w')
         Graph = lil_matrix((total_size, total_size))
         f = open('./data/' + self.dataset + '/' + file_name)
         graph_dict = defaultdict(lambda: [])
@@ -84,7 +83,7 @@ class Classifier():
                 ngram = split_list[ind]
                 if(node != ngram):
                     graph_dict[node].append(ngram.replace('\n', ''))
-                    print(ngram, n_gram_dict[ngram])
+                    print(ngram, n_gram_dict[ngram], file=f)
 
         return graph_dict
 
