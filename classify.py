@@ -101,7 +101,6 @@ class Classifier():
                 for ind in range(0, len(index_arr)):
                     index = index_arr[ind]
                     if(train_arr[ind]):
-                        print(node, token, tag_arr[ind], file=fl)
                         x_train.append(index)
                         y_train.append(tag_arr[ind])
                     elif(test_arr[ind]):
@@ -140,7 +139,7 @@ class Classifier():
         for line in f:
             split_list = line.split("<|>")
             node = split_list[0]
-            for ind in range(1, len(split_list)):
+            for ind in range(2, len(split_list)):
                 ngram = split_list[ind]
                 if(node != ngram):
                     graph_dict[node].append(ngram.replace('\n', ''))
