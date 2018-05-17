@@ -35,6 +35,9 @@ class Classifier():
         ngrams = find_ngrams(total)
         fl = open('tt.txt', 'w')
         for ngram in ngrams:
+            word_comb = ''
+            for elm in ngram:
+                word_comb = word_comb + ' ' + elm['token']
             print(ngram, file=fl)
 
     def _process_graph(self, file_name):
