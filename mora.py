@@ -64,7 +64,7 @@ class Mora(Graph):
             embedding_list.append(embedding)
         clf = LinearDiscriminantAnalysis()
         print(x_train)
-        clf.fit(np.matrix(x_train), np.array(y_train))
+        # clf.fit(np.matrix(x_train), np.array(y_train))
         embedding_list = clf.transform(np.array(embedding_list))
 
         matrix_len = len(embedding_list)
