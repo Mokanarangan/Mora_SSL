@@ -111,6 +111,7 @@ class Classifier():
         print('Classifying')
         clf = HMN(graph=Graph, max_iter=1000)
         x_train = np.array(x_train)
+        print(y_train)
         y_train = np.array(y_train)
         clf.fit(x_train, y_train)
         y_predict = clf.predict(np.array(x_test))
