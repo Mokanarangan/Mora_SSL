@@ -63,6 +63,7 @@ class Classifier():
                 elif(test):
                     X_test.append(tag_dict[tag])
             n_gram_dict[word_comb] = index
+            print(word_comb, file=fl)
         self._process_graph(self.graph_name, total_size, n_gram_dict)
 
     def _process_graph(self, file_name, total_size, n_gram_dict):
