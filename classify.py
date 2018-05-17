@@ -95,7 +95,7 @@ class Classifier():
         y_predict = clf.predict(np.array(X_test))
         total = 0
         correct = 0
-        for index in range(0, len(y_predict)):
+        for index in range(0, 10000):
             total += 1
             if(y_predict[index] == Y_test[index]):
                 correct += 1
