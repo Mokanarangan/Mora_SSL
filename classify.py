@@ -88,7 +88,7 @@ class Classifier():
         y_test = []
         print('Fitting graph')
         count = 0
-        fl = open('tt.txt')
+        fl = open('tt.txt', 'w')
         for node in self.graph:
             if(node in ngram_dict):
                 index_arr = ngram_dict[node]['index']
