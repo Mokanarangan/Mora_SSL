@@ -63,21 +63,21 @@ class Classifier():
                 elif(test):
                     X_test.append(tag_dict[tag])
             n_gram_dict[word_comb] = index
-        self._process_graph(self.graph_name, total_size, n_gram_dict
+        self._process_graph(self.graph_name, total_size, n_gram_dict)
 
     def _process_graph(self, file_name, total_size, n_gram_dict):
         """Process the created in the graph file
         """
         print(total_size)
-        Graph=lil_matrix((total_size, total_size))
-        f=open('./data/' + self.dataset + '/' + file_name)
-        graph_dict=defaultdict(lambda: [])
+        Graph = lil_matrix((total_size, total_size))
+        f = open('./data/' + self.dataset + '/' + file_name)
+        graph_dict = defaultdict(lambda: [])
         for line in f:
-            split_list=line.split("<|>")
-            node=split_list[0]
-            node_ind=n_gram_dict[node]
+            split_list = line.split("<|>")
+            node = split_list[0]
+            node_ind = n_gram_dict[node]
             for ind in range(1, len(split_list)):
-                ngram=split_list[ind]
+                ngram = split_list[ind]
                 if(node != ngram):
                     graph_dict[node].append(ngram.replace('\n', ''))
 
@@ -90,20 +90,20 @@ class Classifier():
             file_name {string} -- path of the file
         """
 
-        file=open(file_name)
-        data=[]
+        file = open(file_name)
+        data = []
         for line in file:
-            split=line.split()
-            tag=None
+            split = line.split()
+            tag = None
             if line in ['\n', '\r\n']:
                 data.append({'token': '</s>', 'tag': tag,
                              'test': test, 'train': train})
                 continue
             if len(split) > 1:
                 if(self.BIO and split[1] != 'O'):
-                    tag=split[1].split('-')[1]
+                    tag = split[1].split('-')[1]
                 else:
-                    tag=split[1]
+                    tag = split[1]
             data.append(
                 {'token': split[0].replace('\n', ''), 'tag': tag, 'test': test, 'train': train})
         return data
