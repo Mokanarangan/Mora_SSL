@@ -61,11 +61,13 @@ class Classifier():
                 elif(test):
                     X_test.append(tag_dict[tag])
             n_gram_dict[word_comb] = index
-        self._process_graph(self.graph_name)
+        self._process_graph(self.graph_name, len(total))
 
-    def _process_graph(self, file_name):
+    def _process_graph(self, file_name, total_size):
         """Process the created in the graph file
         """
+        print(total_size)
+        Graph = lil_matrix((total_size, total_size))
         f = open('./data/' + self.dataset + '/' + file_name)
         graph_dict = defaultdict(lambda: [])
         for line in f:
@@ -75,8 +77,6 @@ class Classifier():
                 ngram = split_list[ind]
                 if(node != ngram):
                     graph_dict[node].append(ngram.replace('\n', ''))
-                else:
-                    print('here')
 
         return graph_dict
 
