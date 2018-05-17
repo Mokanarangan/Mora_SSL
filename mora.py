@@ -57,14 +57,14 @@ class Mora(Graph):
                     tag_count += 1
             test = pointer['test']
             train = pointer['train']
+            print(train)
             if train:
                 x_train.append(embedding)
                 y_train.append(tag_dict[tag])
             ngram_dict[i] = {'ngram': word_comb}
             embedding_list.append(embedding)
         clf = LinearDiscriminantAnalysis()
-        print(x_train)
-        # clf.fit(np.matrix(x_train), np.array(y_train))
+        clf.fit(np.matrix(x_train), np.array(y_train))
         embedding_list = clf.transform(np.array(embedding_list))
 
         matrix_len = len(embedding_list)
