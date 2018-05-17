@@ -37,6 +37,7 @@ class Classifier():
         tag_dict = dict()
         tag_count = 0
         X_train = []
+        X_test = []
         for index in range(0, len(ngrams)):
             ngram = ngrams[index]
             word_comb = ''
@@ -50,12 +51,14 @@ class Classifier():
                 continue
             if(tag != None and tag in string.punctuation):
                 tag = 'O'
-            if(train):
+            if(train or test):
                 if(tag not in tag_dict):
                     tag_dict[tag] = tag_count
                     tag_count += 1
-                X_train.append(tag_dict[tag])
-        print(X_train)
+                if(train):
+                    X_train.append(tag_dict[tag])
+                elif(test):
+                    X_test.append(tag_dict[tag])
 
     def _process_graph(self, file_name):
         """Process the created in the graph file
