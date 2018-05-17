@@ -93,7 +93,13 @@ class Classifier():
         print(Graph, file=open('done.txt', 'w'))
         clf.fit(np.array(X_train), np.array(Y_train))
         y_predict = clf.predict(np.array(X_test))
-        print(len(y_predict), len(Y_test))
+        total = 0
+        correct = 0
+        for index in range(0, len(y_predict)):
+            total += 1
+            if(y_predict[index] == Y_test[index]):
+                correct += 1
+        print(correct / total)
 
     def _process_info(self, file_name, test=False, train=False):
         """Process data and stores in variable.
