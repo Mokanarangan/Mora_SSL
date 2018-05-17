@@ -101,6 +101,7 @@ class Classifier():
                 for ind in range(0, len(index_arr)):
                     index = index_arr[ind]
                     if(train_arr[ind]):
+                        print(node)
                         x_train.append(index)
                         y_train.append(tag_arr[ind])
                     elif(test_arr[ind]):
