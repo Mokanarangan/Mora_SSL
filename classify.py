@@ -81,6 +81,7 @@ class Classifier():
                 ngram = split_list[ind].replace('\n', '')
                 if(node != ngram):
                     Graph[node_ind, n_gram_dict[ngram]] = 1
+                    Graph[n_gram_dict[ngram], node_ind] = 1
 
     def _process_info(self, file_name, test=False, train=False):
         """Process data and stores in variable.
