@@ -31,8 +31,8 @@ class Classifier():
     def classify(self):
         """Classify the data
         """
-        # total = self.train + self.test + self.un_labeled
-        total = self.train + self.test
+        total = self.train + self.test + self.un_labeled
+        # total = self.train + self.test
         ngrams = find_ngrams(total)
         tag_dict = dict()
         tag_count = 0
