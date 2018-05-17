@@ -94,10 +94,9 @@ class Classifier():
                 for ind in range(0, len(index_arr)):
                     index = index_arr[ind]
                     tag = ngram_dict[node]['tag']
-                    if(tag == None):
-                        continue
                     if(train_arr[ind]):
                         if(tag == None):
+                            print(ngram_dict[node])
                             count += 1
                         x_train.append(index)
                         y_train.append(ngram_dict[node]['tag'])
