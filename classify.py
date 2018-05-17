@@ -4,6 +4,7 @@ from scipy.sparse import lil_matrix
 from collections import defaultdict
 from label_propagation import LGC, HMN
 import numpy as np
+import string
 
 
 class Classifier():
@@ -38,19 +39,15 @@ class Classifier():
         tag_dict = dict()
         tag_inv_dict = dict()
         tag_count = 0
-        for ind in range(0, len(total)):
-            if(ind > 0):
-                x1 = total[ind - 1]['token']
-            else:
-                x1 = '</s>'
+        for ind in range(1, len(total) - 1):
+            x1 = total[ind - 1]['token']
             x2 = total[ind]['token']
             tag = total[ind]['tag']
             test = total[ind]['test']
             train = total[ind]['train']
-            if(ind < len(total) - 1):
-                x3 = total[ind + 1]['token']
-            else:
-                x3 = '</s>'
+            if(tag == None or tag in string.punctuation):
+                continue
+            x3 = total[ind + 1]['token']
             ngram = ' '.join([x1, x2, x3])
             if(tag not in tag_dict):
                 tag_dict[tag] = tag_count
