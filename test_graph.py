@@ -26,8 +26,8 @@ parser.add_argument(
 
 args = parser.parse_args()
 # Build the graph
-pmi = PMI(args.dataset)
-connected = pmi.build_graph()
+# pmi = PMI(args.dataset)
+# connected = pmi.build_graph()
 # Performs classification
 classifier = Classifier(args.dataset, args.BIO)
 classifier.classify()
