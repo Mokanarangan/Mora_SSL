@@ -65,13 +65,13 @@ class Classifier():
                     X_train.append(total_size)
                     Y_train.append(tag_dict[tag])
                 elif(test):
-                    X_test.append(tag_dict[tag])
+                    X_test.append(total_size)
             n_gram_dict[word_comb] = total_size
             total_size += 1
         self._process_graph(self.graph_name, total_size,
-                            n_gram_dict, X_train, Y_train)
+                            n_gram_dict, X_train, Y_train, X_test)
 
-    def _process_graph(self, file_name, total_size, n_gram_dict, X_train, Y_train):
+    def _process_graph(self, file_name, total_size, n_gram_dict, X_train, Y_train, X_test):
         """Process the created in the graph file
         """
         fl = open('tt.txt', 'w')
@@ -88,6 +88,8 @@ class Classifier():
                     Graph[n_gram_dict[ngram], node_ind] = 1
         clf = HMN(graph=Graph, max_iter=1000)
         clf.fit(np.array(X_train), np.array(Y_train))
+        y_predict = clf.predict(X_test)
+        print(y_predict)
 
     def _process_info(self, file_name, test=False, train=False):
         """Process data and stores in variable.
