@@ -42,9 +42,12 @@ class Classifier():
         total_size = 0
         for index in range(0, len(ngrams)):
             ngram = ngrams[index]
-            word_comb = ''
+            word_comb = None
             for elm in ngram:
-                word_comb = word_comb + ' ' + elm['token']
+                if(word_comb == None)
+                    word_comb = elm['token']
+                else:
+                    word_comb = word_comb + ' ' + elm['token']
             tag = ngram[1]['tag']
             token = ngram[1]['token']
             train = ngram[1]['train']
