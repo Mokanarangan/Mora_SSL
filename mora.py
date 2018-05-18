@@ -64,7 +64,7 @@ class Mora(Graph):
             ngram_dict[i] = {'ngram': word_comb}
             embedding_list.append(embedding)
         logging.info('Transforming vector..')
-        ann = AnnoyIndex(len(embedding_list[0]), metric='euclidean')
+        ann = AnnoyIndex(len(embedding_list[0]) * 3, metric='euclidean')
         clf = LinearDiscriminantAnalysis()
         clf.fit(np.matrix(x_train), np.array(y_train))
         embedding_list = clf.transform(np.array(embedding_list))
