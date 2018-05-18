@@ -7,6 +7,7 @@ from utils.preprocessing import readEmbeddings, save_obj, load_obj, wordNormaliz
 from sklearn.metrics.pairwise import euclidean_distances
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from scipy.spatial.distance import cdist
+from annoy import AnnoyIndex
 
 
 class Mora(Graph):
@@ -62,34 +63,25 @@ class Mora(Graph):
                 y_train.append(tag_dict[tag])
             ngram_dict[i] = {'ngram': word_comb}
             embedding_list.append(embedding)
+        logging.info('Transforming vector..')
+        ann = AnnoyIndex(len(embedding_list[0]), metric='euclidean')
         clf = LinearDiscriminantAnalysis()
         clf.fit(np.matrix(x_train), np.array(y_train))
         embedding_list = clf.transform(np.array(embedding_list))
-
-        matrix_len = len(embedding_list)
-        chunk_size = 100
-
-        def similarity_by_chunk(start, end):
-            if end > matrix_len:
-                end = matrix_len
-            return euclidean_distances(X=embedding_list[start:end], Y=embedding_list)
-            # return cdist(embedding_list[start:end], embedding_list, 'euclidean')
+        logging.info('Building Graph')
 
         connected_vertices = dict()
-        for chunk_start in range(0, matrix_len, chunk_size):
-            logging.info('Analyzing: %d' % chunk_start)
-            similarity_chunk = similarity_by_chunk(
-                chunk_start, chunk_start + chunk_size)
-            logging.info('Sorting: %d' % chunk_start)
-            for i in range(0, len(similarity_chunk)):
-                arr = np.argsort(similarity_chunk[i])[:50]
-                temp = []
-                for j in arr:
-                    if j in ngram_dict:
-                        temp.append(ngram_dict[j]['ngram'])
-                if (i + chunk_start) in ngram_dict:
-                    connected_vertices[ngram_dict[i +
-                                                  chunk_start]['ngram']] = temp
+
+        for i in range(0, embedding_list):
+            ann.add_item(i, embedding_list[i])
+        ann.build(10)
+        for i in range(0, embedding_list):
+            near_arr = ann.get_nns_by_item(i, 20)
+            temp = []
+            for near in near_arr:
+                temp.append(ngram_dict[near]['ngram'])
+            connected_vertices[ngram_dict[i]['ngram']] = temp
+
         logging.info('Drawing graph')
         f = open('./data/' + self.dataset + '/graph_mora.txt', 'w')
         for key in connected_vertices:
