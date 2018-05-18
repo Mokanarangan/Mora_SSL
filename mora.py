@@ -72,10 +72,10 @@ class Mora(Graph):
 
         connected_vertices = dict()
 
-        for i in range(0, embedding_list):
+        for i in range(0, len(embedding_list)):
             ann.add_item(i, embedding_list[i])
         ann.build(10)
-        for i in range(0, embedding_list):
+        for i in range(0, len(embedding_list)):
             near_arr = ann.get_nns_by_item(i, 20)
             temp = []
             for near in near_arr:
