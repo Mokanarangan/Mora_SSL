@@ -31,6 +31,7 @@ class Mora(Graph):
         embedding_list = []
 
         ngram_dict = dict()
+        total_size = 0
 
         for i in range(0, len(concat_list)):
 
@@ -61,7 +62,8 @@ class Mora(Graph):
             if train:
                 x_train.append(embedding)
                 y_train.append(tag_dict[tag])
-            ngram_dict[i] = {'ngram': word_comb}
+            ngram_dict[total_size] = {'ngram': word_comb}
+            total_size += 1
             embedding_list.append(embedding)
         logging.info('Transforming vector..')
         clf = LinearDiscriminantAnalysis()
@@ -72,10 +74,10 @@ class Mora(Graph):
 
         connected_vertices = dict()
 
-        for i in range(0, len(embedding_list)):
+        for i in range(0, total_size):
             ann.add_item(i, embedding_list[i])
         ann.build(10)
-        for i in range(0, len(embedding_list)):
+        for i in range(0, total_size):
             near_arr = ann.get_nns_by_item(i, 20)
             temp = []
             for near in near_arr:
