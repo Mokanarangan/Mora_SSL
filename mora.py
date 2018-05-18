@@ -78,7 +78,7 @@ class Mora(Graph):
             ann.add_item(i, embedding_list[i])
         ann.build(10)
         for i in range(0, total_size):
-            near_arr = ann.get_nns_by_item(i, 20)
+            near_arr = ann.get_nns_by_item(i, 50)
             temp = []
             for near in near_arr:
                 temp.append(ngram_dict[near]['ngram'])
